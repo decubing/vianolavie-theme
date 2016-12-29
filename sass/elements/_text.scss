@@ -1,0 +1,56 @@
+body {
+  font-size: 100%;
+  font-family: $font-family-Roboto;
+  @media (max-width: $screen-medium) {
+    font-size: 93%;
+  }
+}
+
+.loop_content{
+  font-family: $font-family-PTSerif;
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
+  letter-spacing: .01em;
+  font-weight: $font-weight-normal;
+}
+
+h1, .h1{
+  font-size: $font-size-largest;
+}
+
+h2, .h2 {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-normal;
+  margin: 0;
+  color: $color-primary;
+}
+
+h3, .h3 {
+  font-size: $font-size-large;
+}
+
+h4, .h4 {
+  font-size: $font-size-larger;
+  color: $color-base;
+  padding: 0 $padding-standard;
+  font-weight: $font-weight-bold;
+}
+
+.lead{
+  font-size: $font-size-larger;
+  line-height: $line-height-standard;
+}
+
+.meta_title {
+  color: $color-secondary;
+  font-size: $font-size-medium;
+  font-family: $font-family-Roboto;
+  font-weight: $font-weight-bold;
+  text-decoration: none;
+  text-transform: uppercase;
+  a{
+    text-decoration: none;
+    color: $color-secondary;
+  }
+}

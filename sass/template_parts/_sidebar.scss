@@ -1,0 +1,93 @@
+#sidebar {
+  padding: $padding-standard 0;
+
+  //Sidebar Globals
+  h4 {
+    border-top: $border-thick;
+    margin: 0;
+    color: $color-secondary;
+    font-weight: $font-weight-bold;
+    padding: $padding-smaller 0;
+    font-family: $font-family-Roboto;
+  }
+
+  .sidebar-featured_posts, .sidebar-text_block, .sidebar-suggested_content {
+    margin-bottom: $margin-standard;
+  }
+
+  //Featured Posts
+  .sidebar-featured_posts {
+    width: 100%;
+  }
+
+  //Text Block
+  .sidebar-text_block {
+    line-height: $line-height-standard;
+
+    p:first-of-type {
+      margin-top: 0;
+    }
+
+    .text_block-contributor_login {
+      width: 100%;
+
+      @extend .meta_title;
+
+      padding: $padding-smaller 0;
+      border-top: $border-standard;
+      border-bottom: $border-standard;
+      display: inline-block;
+
+      .contributor_login-icon {
+        font-size: $font-size-larger;
+        padding: 0 $padding-smaller;
+      }
+    }
+  }
+
+  //Suggested Content Widget
+  .sidebar-suggested_content {
+    width: 100%;
+    border-bottom: $border-standard;
+    
+    .suggested_content-listed_post {
+      
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      background-color: white;
+      font-family: $font-family-PTSerif;
+      border-right: $border-standard;
+      border-left: $border-standard;
+
+      .listed_post-image {
+        padding-bottom: $padding-image_ratio;
+        margin-bottom: $padding-standard;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        display: inline-block;
+        border-top: $border-standard;
+      }
+
+      span {
+        display: inline-block;
+      }
+
+      .listed_post-excerpt {
+        padding: 0 $padding-standard $padding-standard;
+        color: $color-secondary;
+        width: 86%;
+      }
+    }
+
+    @media only screen and (max-width: $screen-small) {
+      position: relative !important;
+
+      &.sticky-placeholder {
+        display: none;
+      }
+    }
+  }
+}

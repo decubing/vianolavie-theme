@@ -1,0 +1,71 @@
+// "Blake Table Grid"
+.container {
+  position: relative;
+  margin: 0 auto;
+  width: $screen-large;
+  @media (max-width: $screen-large) {
+    width: 100%;
+  }
+  &.container:before, &.container:after {
+    clear: both;
+    content: " ";
+    display: table;
+  }
+}
+
+.table, .row {
+  clear: both;
+  position: relative;
+  &:before, &:after {
+    clear: both;
+    display: table;
+    content: " ";
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.table {
+  display: table;
+  table-layout: fixed;
+  @media (max-width: $screen-small) {
+    display: block;
+  }
+  .table-cell {
+    display: table-cell;
+    vertical-align: top;
+  }
+}
+
+.showing-page-sharer {
+  @extend .showing;
+  height: 1.2em !important;
+}
+
+.showing-triangle {
+  width: 0;
+  height: 0 !important;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid rgba(0, 0, 0, 0.58);
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  position: absolute;
+  overflow: hidden;
+}
+
+.hiding-triangle {
+  @extend .showing;
+  border-left: 0px solid transparent;
+  border-right: 0px solid transparent;
+  border-bottom: 0px solid $color-disabled;
+}
+
+.no_mobile{
+  @media (max-width: $screen-small)  {
+    display: none !important;
+  }
+}

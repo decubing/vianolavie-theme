@@ -1,0 +1,55 @@
+/*!
+Theme Name: ViaNolaVie
+Theme URI: http://vianolavie.com/
+Author: Lowling
+Author URI: https://lowling.com
+Description: The official Via NolaVie WordPress theme.
+Version: 0.0.1
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: vnv
+Tags:
+*/
+
+/*--------------------------------------------------------------
+# Variables
+--------------------------------------------------------------*/
+@import "sass/variables/colors";
+@import "sass/variables/effects";
+@import "sass/variables/element_sizing";
+@import "sass/variables/typography";
+
+/*--------------------------------------------------------------
+# Helper Classes
+--------------------------------------------------------------*/
+@import "sass/helper_classes/author_info";
+@import "sass/helper_classes/backgrounds";
+@import "sass/helper_classes/grid";
+@import "sass/helper_classes/sizing_and_alignments";
+@import "sass/helper_classes/wordpress";
+
+/*--------------------------------------------------------------
+# Elements
+--------------------------------------------------------------*/
+@import "sass/elements/badges";
+@import "sass/elements/buttons";
+@import "sass/elements/forms";
+@import "sass/elements/images";
+@import "sass/elements/links";
+@import "sass/elements/tables";
+@import "sass/elements/text";
+
+/*--------------------------------------------------------------
+# Template Parts
+--------------------------------------------------------------*/
+@import "sass/template_parts/features";
+@import "sass/template_parts/footer";
+@import "sass/template_parts/header";
+@import "sass/template_parts/loop_content";
+@import "sass/template_parts/layouts";
+@import "sass/template_parts/sidebar";
+
+/*--------------------------------------------------------------
+# Fonts
+--------------------------------------------------------------*/
+@import "sass/fonts/font-awesome/scss/font-awesome";

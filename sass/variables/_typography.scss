@@ -1,0 +1,27 @@
+//@import Fonts
+@import url(https://fonts.googleapis.com/css?family=PT+Serif:400,500,700);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700);
+
+//Declare Font Variales
+$font-family-PTSerif: 'PT Serif', serif;
+$font-family-Roboto: 'Roboto', sans-serif;
+
+$font-weight-bold: 700;
+$font-weight-medium: 500;
+$font-weight-normal: 400;
+
+$font-size-largest: 2.7em;
+$font-size-xl: 2.03em;
+$font-size-large: 1.75em;
+$font-size-larger: 1.3em;
+$font-size-medium: 1.1em;
+$font-size-smaller: 1em;
+$font-size-small: .8em;
+
+//Item specific variables
+$font-size-primary-nav: 1.15em;
+$font-size-table-header: 1.1em;
+$font-size-button: 1em;
+$font-size-button-circle: 1.3em;
+
+$line-height-standard: 1.5em;

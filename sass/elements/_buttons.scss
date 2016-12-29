@@ -1,0 +1,79 @@
+.button{
+  display: inline-block;
+  background: $color-active;
+  color: $color-white;
+  text-decoration: none;
+  padding: $padding-smaller $padding-standard; 
+  box-shadow: $box-shadow-standard;
+  border-radius: $border-radius-standard;
+  text-align: center;
+  text-align-last: center;
+  transition: box-shadow .4s;
+  border: 0;
+  @extend .meta_title; 
+  @media only screen and (max-width: $screen-smallest) {
+    display: block !important;
+    float: none !important;
+    width: 100% !important;
+    margin: $margin-smaller 0;
+  }
+  &:hover{
+    box-shadow: $box-shadow-large;
+    cursor: pointer;
+  }
+  &:active, &:focus{
+    opacity: .8;
+    outline: none;
+  }
+  &.button-large{
+    font-size: $font-size-large;
+  }
+  &.button-circle {
+    border-radius: 50%;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    @media only screen and (max-width: $screen-smallest) {
+      display: inline-block !important;
+      float: none !important;
+      width: inherit !important;
+      margin: 0;
+    }
+  }
+  &.button-outline{
+    border: $border-standard;
+    background: transparent;
+    box-shadow: none;
+  }
+  &.button-inline {
+    background: transparent;
+    box-shadow: none;
+    text-shadow: $text-shadow-small;
+    padding: 0;
+  }
+  &.button-red{
+    background: $color-red;
+    color: $color-white;
+  }
+}
+
+.button-play {
+  color: white;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  left: 0;
+  text-align: center;
+  text-align-last: center;
+  z-index: 100;
+  i{
+    font-size: 5em;
+    -webkit-text-shadow: $text-shadow-standard;
+    -moz-text-shadow: $text-shadow-standard;
+    text-shadow: $text-shadow-standard;   
+  }
+}
+a:hover .button-play{
+  opacity: .8;
+}

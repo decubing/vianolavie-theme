@@ -1,0 +1,21 @@
+//Media Queries
+$screen-smallest: 600px;
+$screen-small: 780px;
+$screen-medium: 992px;
+$screen-large: 1200px;
+
+//Standard Paddings and Margins
+$padding-small: 10px;
+$padding-smaller: 15px;
+$padding-standard: 20px;
+$padding-large: 2em;
+$padding-larger: 30px;
+$margin-smaller: .8em;
+$margin-standard: 1.4em;
+$padding-image_ratio: 46%;
+
+//Standard Borders
+$border-radius-standard: 4px;
+$border-radius-round: 20px;
+$border-standard: 1px solid $color-disabled;
+$border-thick: 4px solid $color-secondary;

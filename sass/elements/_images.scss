@@ -1,0 +1,13 @@
+img, a img{
+  border: 0;
+}
+.image-circular{
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  width: 3.5em;
+  height: 3.5em;
+  float: left;
+  background-size: cover;
+  background-position: center center;
+}

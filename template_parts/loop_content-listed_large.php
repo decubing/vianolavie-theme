@@ -4,7 +4,11 @@
   
   <a class="listed_large-featured_image" style="background-image:url(<?php echo wp_get_attachment_image_src(get_post_thumbnail_id($post->id), 'large')[0];  ?>)" href="<?php the_permalink(); ?>"> 
     
-    <?php get_badge($post->ID); ?>
+    <div class="featured_image-badge">
+      
+      <?php get_badge($post->ID); ?>
+      
+    </div>
 
     <?php if(get_field('media_type', $post->ID)) echo '<span class="button-play"><i class="fa fa-play-circle-o"></i></span> ';?>
 
@@ -14,12 +18,21 @@
     
   <div class="listed_large-post_content">
     
-    <?php
-    //Get badge on posts without thumbails
-    get_badge($post->ID);
-    ?>
+    <a class="post_content-title"  href="<?php the_permalink();?>">
 
-    <h2 class="post_content-title"><a href="<?php the_permalink();?>"> <?php echo get_limited_title($post->ID);?> </a></h2>
+      <?php
+      //Get badge on posts without thumbails
+      if(!has_post_thumbnail() && !get_field('media_type', $post->ID)){
+      ?>
+      
+      <span class="title-badge"><?php get_badge($post->ID); ?></span>
+      
+      <?php
+      }
+      
+      the_title()
+      ?>
+    </a>
     <div class="post_content-meta">
       
       <?php the_category(', '); the_date('m/d/Y', ' &#8226; ');?>

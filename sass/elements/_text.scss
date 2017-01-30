@@ -21,7 +21,6 @@ h1, .h1{
 
 h2, .h2 {
   font-size: $font-size-xl;
-  font-weight: $font-weight-normal;
   margin: 0;
   color: $color-primary;
 }
@@ -34,7 +33,7 @@ h4, .h4 {
   font-size: $font-size-larger;
   color: $color-base;
   padding: 0 $padding-standard;
-  font-weight: $font-weight-bold;
+  font-weight: $font-weight-medium;
 }
 
 .lead{
@@ -44,8 +43,8 @@ h4, .h4 {
 
 .meta_title {
   color: $color-secondary;
-  font-size: $font-size-medium;
   font-family: $font-family-Roboto;
+  font-size: $font-size-medium;
   font-weight: $font-weight-bold;
   text-decoration: none;
   text-transform: uppercase;
@@ -53,4 +52,11 @@ h4, .h4 {
     text-decoration: none;
     color: $color-secondary;
   }
+}
+
+.section_title{
+  border-top: $border-thick;
+  padding: $padding-small 0;
+  font-size: $font-size-larger;
+  font-weight: $font-weight-medium;
 }

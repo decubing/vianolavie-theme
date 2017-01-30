@@ -5,23 +5,19 @@ if(is_archive() || is_search()):
 //Masthead Title Feature
 get_template_part('template_parts/feature', 'archive_masthead');
 
-//Popular Tags Feature
-get_template_part('template_parts/feature', 'popular_tags');
-
 ?>
 
-<div id="layout-archive">
+<div id="layout-archive" class="layout-archive">
   <!-- Does not extend -->
-  <div class="container table"> 
-    
+      
     <?php 
     
     //Begin Loop Content
     if(have_posts()): 
     
     ?>
-    <!-- Does not extend -->
-    <div class="archive-loop_content table-cell"> 
+
+    <div class="archive-loop_content"> 
 
       <?php 
       
@@ -40,8 +36,8 @@ get_template_part('template_parts/feature', 'popular_tags');
     </div>
     
     <?php else: ?>
-    <!-- Does not extend -->
-    <div class="archive-notice table-cell">    
+
+    <div class="archive-notice">    
     
       <?php get_template_part('template_parts/feature', '404_notice'); ?>
     
@@ -53,18 +49,7 @@ get_template_part('template_parts/feature', 'popular_tags');
     endif;
     
     ?>
-    <!-- Does not extend -->
-    <div class="archive-page_sharer table-cell">
-      
-      <?php
-        
-      //Feature Sharing Option
-      get_template_part('template_parts/feature', 'page_sharer');
-  
-      ?>
-      
-    </div>
-  </div>
+
 </div>
 
 <?php endif;?>

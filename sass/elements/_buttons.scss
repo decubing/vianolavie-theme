@@ -28,6 +28,10 @@
   &.button-large{
     font-size: $font-size-large;
   }
+  &.button-small{
+    font-size: $font-size-small !important;
+    padding: $padding-small $padding-smaller; 
+  }
   &.button-circle {
     border-radius: 50%;
     text-decoration: none;
@@ -53,7 +57,7 @@
   }
   &.button-red{
     background: $color-red;
-    color: $color-white;
+    color: $color-white !important;
   }
 }
 

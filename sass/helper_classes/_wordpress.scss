@@ -126,3 +126,7 @@ a {
     padding-bottom: $padding-smaller;
   }
 }
+.gform_button{
+  @extend .button, .button-red;
+  margin-top: -18px !important;
+}

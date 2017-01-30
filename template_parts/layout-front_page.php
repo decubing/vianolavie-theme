@@ -1,86 +1,68 @@
 <?php 
-  
 if(is_front_page()):
 
   //Masthead Slider Feature
   get_template_part('template_parts/feature', 'masthead_posts');
-  
-  //Popular Tags Feature
-  get_template_part('template_parts/feature', 'popular_tags');
-  
 ?>
 
-
-<div id="layout-front_page">
-  <!-- Does not extend -->
-  <div class="front_page-container table"> 
-    
-    <?php 
-      
-    //Begin Recent Posts Query
-    $paged = ( get_query_var('page') ) ? get_query_var('page') : 1; //Using 'page' for pagination to work on front page.
-    $the_query = new WP_Query( 'post_type=post&paged='.$paged );
-    if ( $the_query->have_posts() ):
-    
-    ?>
-      
-    <div class="front_page-loop_content"> 
- 
-      <?php
-        
-      //Loop Recent Posts
-      while ( $the_query->have_posts() ) {
-        $the_query->the_post();
-        
-        //Large Post in Loop
-        get_template_part('template_parts/loop_content', 'listed_large');
-    
-      }      
-      
-      //Pagination
-      require( locate_template( 'template_parts/loop_content-pagination.php' ) ); //Using require() because $the_query doesn't exented to get_template_parts();
-
-      ?>
-      
-      <div class="mobile loop_content-load_posts">
-        <a class="load_posts-button" href="#">
-          Load More Posts
-        </a>  
-        <span class="load_posts-image_overlay"></span>
+<div class="layout-front_page">
+  <div class="front_page-top_content">
+    <div class="top_content-voice_of_the_week">
+      <div class="voice_of_the_week-label">
+        Voice of the Week
       </div>
-  
-    </div>
-    
-    <?php
-    //End Recent Posts Query
-    wp_reset_postdata();
-    endif;
-    ?>
-    
-    <div class="front_page-page_sharer table-cell">
+      <div class="voice_of_the_week-loop_content">
+        
+        <?php
+        //Voice of the Week Loop
+        $post_object = get_field('voice_of_the_week');
+        if( $post_object ){
+          $post = $post_object;
+          setup_postdata( $post );
+          get_template_part('template_parts/loop_content','listed_large'); 
+          wp_reset_postdata();
+        }
+        ?>
       
+      </div>    
+    </div>
+    <div class="top_content-recent_posts">
+      <div class="recent_posts-feature">
+      
+        <?php 
+        //Recent Posts 
+        get_template_part('template_parts/feature','recent_posts');
+        ?>
+        
+      </div>
+    </div>
+  </div>
+  <div class="front_page-center_content">
+    <div class="center_content-content">
+      <div class="content-info_area">
+        
+        <?php the_field('info_area');?>
+        
+      </div>
+      <div class="content-quick_links">
+        
+        <?php
+        // Quick Links
+        if( have_rows('quick_links') ){
+          while ( have_rows('quick_links') ) : the_row();
+            echo '<a class="quick_links-single" href="'.get_sub_field('link_url').'"><i class="fa '.get_sub_field('link_icon').'"></i>'.get_sub_field('link_text').'</a>';
+          endwhile;
+        }
+        ?>
+      </div>
+    </div>
+  </div>
+  <div class="front_page-bottom_content">
+    <div class="bottom_content-feature">
+
       <?php
-        
-      //Page Sharer
-      get_template_part('template_parts/feature', 'page_sharer');
-      
-      ?>
-      
-    </div>
-    
-    <div id="sidebar">
-      
-      <?php 
-        
-      //Featured Posts
-      get_template_part('template_parts/sidebar', 'featured_posts');
-
-      //Text Blog
-      get_template_part('template_parts/sidebar', 'text_block');
-
-      //Suggested Posts
-      get_template_part('template_parts/sidebar', 'suggested_content');
-
+      //Suggested Content
+      get_template_part('template_parts/feature', 'suggested_content')
       ?>
       
     </div>

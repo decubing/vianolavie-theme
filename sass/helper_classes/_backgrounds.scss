@@ -20,6 +20,11 @@ a:hover .image_overlay{
 .background-blur{
   background-size: cover;
   background-position: center center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   -webkit-filter: blur(40px);
   -moz-filter: blur(40px);
   -o-filter: blur(40px);

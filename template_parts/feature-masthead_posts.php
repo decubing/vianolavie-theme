@@ -1,11 +1,12 @@
 <?php if(have_rows('masthead_posts-slider')):?>
 
 <div class="feature-masthead_posts row">
+
   <a href="#" class="masthead_posts-control_next"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
   <a href="#" class="masthead_posts-control_prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+  <img class="masthead_posts-swipe" src="<?php echo get_template_directory_uri(); ?>/images/icon-swipe_to_browse.png">
   <div class="masthead_posts-slider">
-    
-  <?php  
+      <?php  
   
   //Start Loop  
   while ( have_rows('masthead_posts-slider') ) : the_row(); 
@@ -34,9 +35,11 @@
   ?>
   
     <a class="slider-listed_post" style="background-image:url(<?php echo $listed_post_image; ?>)" href="<?php echo $listed_post_link; ?>">
+      <span class="listed_post-badge">
       
-      <?php get_badge($listed_post->ID);?>      
-      
+        <?php get_badge($listed_post->ID);?>   
+           
+      </span>
       <span class="listed_post-h3"><?php echo $listed_post_title; ?> <!-- impose character limit --></span>
       <span class="listed_post-meta_title"><?php echo $listed_post_subtitle; ?> <!-- impose character limit --></span>
       

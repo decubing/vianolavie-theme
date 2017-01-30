@@ -11,6 +11,12 @@
     content: " ";
     display: table;
   }
+  &.container-medium{
+    width: $screen-medium;
+    @media (max-width: $screen-medium) {
+      width: 100%;
+    }
+  }
 }
 
 .table, .row {
@@ -30,9 +36,6 @@
 .table {
   display: table;
   table-layout: fixed;
-  @media (max-width: $screen-small) {
-    display: block;
-  }
   .table-cell {
     display: table-cell;
     vertical-align: top;

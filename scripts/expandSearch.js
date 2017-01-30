@@ -1,32 +1,15 @@
-function expandSearch() {
-  (function($) {
-    
-    // Declare variables
-    var siteSearch          = $('#site_search-form'),
-        searchButton        = $('#site_search-form button'),
-        navigationMain      = $('.navigation-main');
+
+(function($) {
+  $.fn.expandSearch = function() {
                 
     //Create Search Button Hide/Show Effects
-    siteSearch.click(function (e) {
-      var searchState = 'active';
-      $(this).addClass('active');
-      navigationMain.addClass('faded');
-    });
-    
-
-    $(document).click(function (e) {
-      if ( $(e.target).closest(siteSearch).length === 0 ) {
-        siteSearch.removeClass('active');
-        var searchState = 'notActive';
-        navigationMain.removeClass('faded');
+    this.click(function (e) {
+      if(!$(this).hasClass('active') || $(window).width() > 780){
+        e.preventDefault();                
       }
+      $(this).addClass('active');
     });
-    
-    //Trigger search query when ready
-    searchButton.click(function (e) {
-      if(!siteSearch.hasClass('active'))
-        e.preventDefault();
-    });    
-    
-  })( jQuery );
-};
+  };  
+})( jQuery );
+
+

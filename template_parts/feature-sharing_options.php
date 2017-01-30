@@ -1,17 +1,4 @@
-<!-- Gettng rid   of button and button-inline causes issues right now -->
-<div class="feature-sharing_options button button-inline">
-  <i class="fa fa-share sharing_options-sharing_content" aria-hidden="true">
-  	<div class="sharing_content-wrapper">
-  		<div class="triangle_right"></div>
-		  	<a target="_blank" style=" border-right: 1px solid black" href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink();?>">
-		  		<i class="fa fa-facebook"></i>
-		  	</a>
-			  <a target="_blank" href="https://twitter.com/home?status=<?php the_permalink();?>">
-			  	<i class="fa fa-twitter"></i>
-			  </a>
-			  <a target="_blank" href="mailto:?&subject=On%20ViaNolaVie:%20%22<?php the_title();?>%22&body=%22<?php echo get_the_excerpt();?>%22%0A%0AFull%20article%3A%20<?php the_permalink()?>">
-			  	<i class="fa fa-envelope"></i>
-			  </a>
-  	</div>
-  </i>
+<div class="feature-sharing_options">
+  <iframe class="sharing_options-facebook" src="https://www.facebook.com/plugins/share_button.php?href=<?php the_permalink() ?> &layout=button_count&size=large&mobile_iframe=true&appId=1430425103868376&width=98&height=28" width="98" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+  <a class="sharing_options-twitter twitter-share-button" href="https://twitter.com/share" data-size="large" data-url="<?php the_permalink() ?>" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>

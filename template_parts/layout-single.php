@@ -1,45 +1,49 @@
 <?php if(is_single() && have_posts()):?>
 
-<div id="layout-single" class="loop_content"><!-- if is front page: layout-single, class: loop_content -->
+<div class="layout-single">
 
-  <?php 
-  
-  //Begin Single Loop
-  while(have_posts()): the_post();
-  
+  <?php
   //Media Masthead
-  get_template_part('template_parts/loop_content', 'media_masthead');
+  get_template_part('template_parts/feature', 'media_masthead');
+  ?>  
   
-  ?>
+  <div class="single-container">
+        
+    <div class="container-content">
+  
+    <?php
+    //Begin Single Loop
+    while(have_posts()): the_post();
+    ?>
+  
+      <div class="content-loop_content">
+        
+        <?php 
+                
+        //Single Post
+        get_template_part('template_parts/loop_content', 'single_post'); 
+              
+        ?>
       
-  <div class="loop_content-container">  
-     <!-- Does not extend -->                   
-    <div class="loop_content-single_post table-cell">
-      
-      <?php get_template_part('template_parts/loop_content', 'single_post'); ?>
-      
-    </div>
-    
-    <div id="sidebar">
+      </div>
     
       <?php
-        
-      //Suggested Content Sidebar
-      get_template_part('template_parts/sidebar', 'suggested_content');
-      
+      //End Single Post Loop
+      endwhile;
       ?>
-    
+      
+      <div class="content-feature">
+      
+        <?php
+          
+        //Suggested Content
+        get_template_part('template_parts/feature', 'recent_posts');
+        
+        ?>
+      
+      </div>
     </div>
-
   </div>
-  
-  <?php
-    
-  //End Single Post Loop
-  endwhile;
-  
-  ?>
-  
 </div> 
 
 

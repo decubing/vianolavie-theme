@@ -9,11 +9,11 @@ function vnv_scripts_and_styles() {
 	wp_enqueue_style( 'fancybox-style', get_template_directory_uri().'/scripts/fancybox/jquery.fancybox.css?v=2.1.5' );
 	
 	//Scripts
-	wp_enqueue_script( 'vnv-scripts', get_template_directory_uri().'/functions.js', array( 'vnv-autosize','vnv-mastheadSlider','vnv-mobileNav','vnv-pageSharer','vnv-expandSearch','vnv-sharethis','jSticky', 'sticky-kit', 'fancybox', 'jquery' ), NULL, true ); //Remember to update Dependencies..
+	wp_enqueue_script( 'vnv-scripts', get_template_directory_uri().'/functions.js', array( 'vnv-autosize','vnv-mastheadSlider','vnv-toggleMobileNav','vnv-sharethis','jSticky', 'sticky-kit', 'fancybox', 'jquery' ), NULL, true ); //Remember to update Dependencies..
 	wp_enqueue_script( 'vnv-autosize', get_template_directory_uri().'/scripts/autosize.js', array('jquery'), NULL, true );
 	wp_enqueue_script( 'vnv-mastheadSlider', get_template_directory_uri().'/scripts/mastheadSlider.js', array('jquery'), NULL, true );
-	wp_enqueue_script( 'vnv-mobileNav', get_template_directory_uri().'/scripts/mobileNav.js', array('jquery'), NULL, true );
-	wp_enqueue_script( 'vnv-pageSharer', get_template_directory_uri().'/scripts/pageSharer.js', array('jquery'), NULL, true );
+	wp_enqueue_script( 'vnv-toggleMobileNav', get_template_directory_uri().'/scripts/toggleMobileNav.js', array('jquery'), NULL, true );
+// 	wp_enqueue_script( 'vnv-pageSharer', get_template_directory_uri().'/scripts/pageSharer.js', array('jquery'), NULL, true );
 	wp_enqueue_script( 'vnv-expandSearch', get_template_directory_uri().'/scripts/expandSearch.js', array('jquery'), NULL, true );
 	wp_enqueue_script( 'vnv-sharethis', get_template_directory_uri().'/scripts/shareThis.js', array('jquery'), NULL, true );
 	wp_enqueue_script( 'jSticky', get_template_directory_uri().'/scripts/jSticky.js', array('jquery'), '11.4.2012', true );

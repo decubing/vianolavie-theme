@@ -29,7 +29,7 @@
             if(is_user_logged_in()){
              echo '<div class="tag_line-user">Hello '.wp_get_current_user()->user_login.'! <a class="user-logout" href="'.wp_logout_url().'">Logout</a></div>';
             }else{
-              echo '<a class="tag_line-button" href="'.get_permalink(1185).'"><img alt="Talk to Us" src="'.get_template_directory_uri().'/images/button-talk_to_us.svg"></a>';
+              echo '<a class="tag_line-button" href="'.get_permalink( get_page_by_path( 'contribute') ).'"><img alt="Talk to Us" src="'.get_template_directory_uri().'/images/button-talk_to_us.svg"></a>';
             }
             ?>
                         

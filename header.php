@@ -54,7 +54,7 @@
             </ul>
             <div class="links-site_search">
               <form class="site_search-form" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ) ?>">
-                <input id="form-input"class="form-input" type="text" placeholder="Enter search terms.." value="" name="s" required>
+                <input id="form-input"class="form-input" type="text" placeholder="Enter search terms.." value="<?php echo get_search_query() ?>" name="s" required>
                 <button><i class="fa fa-search"></i></button>
               </form>
             </div>  

@@ -273,3 +273,28 @@
     height: 100%;
   }
 }
+
+//Class URL Generator
+.feature-class_url_generator{
+  .class_url_generator-name, .class_url_generator-url{
+    font-weight: $font-weight-bold;
+    display: block;
+    margin-top: $margin-standard;
+  }
+  .class_url_generator-input{
+    padding: 5px 4px;   
+    font-size: inherit;
+    font-family: inherit;
+  }
+  .class_url_generator-submit{
+    @extend .button, .button-red;
+    margin: $margin-smaller 0 $margin-standard;
+    display: block;
+  }
+  .class_url_generator-result{
+    background: #EBEBEB; 
+    padding: $padding-standard;
+    min-height: 40px; 
+    font-weight:$font-weight-bold;
+  }
+}

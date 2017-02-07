@@ -21,6 +21,10 @@
     //Registration Page text
     get_template_part('template_parts/feature', 'registration_form_text');
     
+    //Class URL Generator
+    if(is_page('create-class-url'))
+      get_template_part('template_parts/feature', 'class_url_generator');
+    
     //The Content
     the_content();
     

@@ -1,13 +1,15 @@
 
 (function($) {
   $.fn.expandSearch = function() {
-                
+    
+    var searchForm = this;
+
     //Create Search Button Hide/Show Effects
-    this.click(function (e) {
-      if(!$(this).hasClass('active') || $(window).width() > 780){
-        e.preventDefault();                
+    searchForm.find('button').click(function (e) {
+      if( searchForm.hasClass('active') == false && $(window).width() > 780){
+        e.preventDefault();               
       }
-      $(this).addClass('active');
+      searchForm.addClass('active');
     });
   };  
 })( jQuery );

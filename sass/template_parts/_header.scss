@@ -55,7 +55,7 @@
         padding: $padding-small 0;
         border-bottom: $border-standard;
         @media only screen and (max-width: $screen-small) {
-          display: none;
+          padding: $margin-standard 0;
         }
         .tag_line-button{
           float: right;
@@ -69,10 +69,23 @@
           float: right;
           font-family: $font-family-Roboto;
           font-size: $font-size-small;
+          @media only screen and (max-width: $screen-smallest) {
+            display: block;
+            float: none;
+            margin: $margin-smaller 0 0 0;
+            padding: $padding-standard;
+            background: $color-bg-footer;
+            text-align: center;
+          }
           .user-logout{
             @extend .button, .button-small;
             padding: 4px;
             margin-left: 10px;
+            @media only screen and (max-width: $screen-small) {
+              display: inline-block !important;
+              width: inherit !important;
+              margin: 0 0 0 10px;
+            }
           }
         }
       }

@@ -71,4 +71,11 @@ function vnv_custom_excerpt_length( $length ) {
 }
 add_filter( 'excerpt_length', 'vnv_custom_excerpt_length' );
 
+/**
+ * Remove Add Media Button
+ */
+function remove_add_media_buttons(){
+  remove_action( 'media_buttons', 'media_buttons' );
+}
+add_action('admin_head', 'remove_add_media_buttons');
 ?>

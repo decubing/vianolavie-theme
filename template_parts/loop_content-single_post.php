@@ -28,8 +28,14 @@
     <?php the_date('M d, Y');?> <span class="post_meta-divider">•</span> <?php the_category(', '); ?>
   </div>
   <div class="single_post-the_content">
-    
-    <?php the_content();?>
+        
+    <?php 
+    //Post Images
+    get_template_part('template_parts/loop_content', 'post_images');
+
+    //The Content
+    the_content();    
+    ?>
     
   </div>
   <div class="single_post-sharing_options">

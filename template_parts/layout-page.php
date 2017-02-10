@@ -31,7 +31,7 @@
     //Signup Page
     if(is_page('contribute')){
       if(!is_user_logged_in()){
-        echo '<div class="single_page-login">Already signed up? <a href="http://www.vianolavie.org/login">Click here</a> to login.</div>';     
+        echo '<div class="single_page-login">Already signed up? <a href="'.esc_url( home_url( '/' ) ).'login">Click here</a> to login.</div>';     
         echo do_shortcode('[gravityform id="3" title="false" description="false"]');   
       }else{
         echo '<div class="single_page-login">You are currently logged in as <em>'.wp_get_current_user()->user_login.'</em>. Not you? <a class="user-logout" href="'.wp_logout_url().'">Logout</a>.</div>';     

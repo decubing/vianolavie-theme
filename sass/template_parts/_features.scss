@@ -168,17 +168,19 @@
     @extend .section_title;
   }
   .recent_posts-loop_content {
+    border: $border-standard;
     .loop_content-listed_post{
       position: relative;
       display: inline-block;
       width: 100%;
       background-color: white;
       font-family: $font-family-PTSerif;
-      border-right: $border-standard;
-      border-left: $border-standard;
       &:first-of-type{
         .listed_post-title, .listed_post-excerpt{
           padding-right: $padding-standard;
+        }
+        .listed_post-title{
+          padding-top: $padding-standard;
         }
       }
       .listed_post-title, .listed_post-image, .listed_post-excerpt{
@@ -193,7 +195,6 @@
       }
       .listed_post-image {
         padding-bottom: $padding-image_ratio;
-        margin-bottom: $padding-standard;
         width: 100%;
         background-repeat: no-repeat;
         background-size: cover;

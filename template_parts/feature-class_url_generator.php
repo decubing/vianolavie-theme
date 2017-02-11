@@ -8,10 +8,10 @@
   
   <script>
   function generateClassURL() {
-      var uri = document.getElementById("txt").value;
-      var res = encodeURIComponent(uri);
-      var vianola = "<?php echo esc_url( home_url( '/' ) ); ?>register?class=";
-      document.getElementById("result").innerHTML = vianola+res;
+    var uri = document.getElementById("txt").value;
+    var res = encodeURIComponent(uri);
+    var vianola = "<?php echo esc_url( home_url( '/' ) ); ?>register?class=";
+    document.getElementById("result").innerHTML = vianola+res;
   }
   </script>
 </div>

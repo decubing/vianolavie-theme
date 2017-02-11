@@ -10,7 +10,7 @@
   function myFunction() {
       var uri = document.getElementById("txt").value;
       var res = encodeURIComponent(uri);
-      var vianola = "http://vianolavie:8888/register?class=";
+      var vianola = "<?php echo esc_url( home_url( '/' ) ); ?>/register?class=";
       document.getElementById("result").innerHTML = vianola+res;
   }
   </script>

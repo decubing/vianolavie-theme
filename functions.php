@@ -30,4 +30,7 @@ include_once('includes/get_limited_title.php' );
 //Custom Captions and other Media Settings
 include_once('includes/media_settings.php' );
 
+//Custom Author Info Area
+include_once('includes/get_author_info.php' );
+
 ?>

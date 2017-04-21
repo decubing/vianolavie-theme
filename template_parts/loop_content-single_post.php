@@ -5,14 +5,7 @@
     //Begin Authors
     $authors = get_coauthors();    
     foreach ($authors as $author):
-    ?>
-    
-    <a class="author_info-the_author" href="<?php echo get_author_posts_url($author->ID);?>">
-      <span class="the_author-avatar" style="background-image:url(<?php echo get_avatar_url( $author->ID, array('size' => '120') ); ?>)"></span>
-      <span class="the_author-name_and_roll"><?php echo $author->display_name;?> <span class="name_and_roll-the_role"><?php echo implode( ', ', get_userdata($author->ID)->roles);?></span></span>
-    </a>
-  
-    <?php
+       echo get_author_info($author->ID);
     //End Authors
     endforeach;
     ?>

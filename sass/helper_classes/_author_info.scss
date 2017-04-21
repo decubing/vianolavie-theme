@@ -2,7 +2,7 @@
   color: $color-primary;
   text-transform: capitalize;
   text-decoration: none;
-  margin-left: $margin-smaller;
+  margin-left: $margin-standard;
   font-size: $font-size-medium;
   font-family: $font-family-Roboto;
   display: inline-block;
@@ -12,11 +12,12 @@
   .the_author-avatar{
     @extend .image-circular;
     margin-right: .5em;
-    float: left;
+    display: inline-block;
   }
   .the_author-name_and_roll{
     display: inline-block;
     padding-top: $padding-small;
+    vertical-align: top;
     .name_and_roll-the_role{
       color: $color-secondary;            
       display: block;

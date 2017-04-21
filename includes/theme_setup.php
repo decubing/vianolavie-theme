@@ -1,6 +1,6 @@
 <?php
   
-if ( ! function_exists( 'ph_setup' ) ) :
+if ( ! function_exists( 'vnv_setup' ) ) :
   /**
    * Sets up theme defaults and registers support for various WordPress features.
    *
@@ -8,7 +8,7 @@ if ( ! function_exists( 'ph_setup' ) ) :
    * runs before the init hook. The init hook is too late for some features, such
    * as indicating support for post thumbnails.
    */
-  function ph_setup() {
+  function vnv_setup() {
   	 
   	// Add default posts and comments RSS feed links to head.
   	add_theme_support( 'automatic-feed-links' );
@@ -23,7 +23,7 @@ if ( ! function_exists( 'ph_setup' ) ) :
   
   	// This theme uses wp_nav_menu() in one location.
   	register_nav_menus( array(
-  		'primary' => esc_html__( 'Primary', 'ph' ),
+  		'primary' => esc_html__( 'Primary', 'vnv' ),
   	) );
   
   	/*
@@ -41,7 +41,7 @@ if ( ! function_exists( 'ph_setup' ) ) :
   
   }
 endif;
-add_action( 'after_setup_theme', 'ph_setup' );  
+add_action( 'after_setup_theme', 'vnv_setup' );  
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
@@ -50,10 +50,10 @@ add_action( 'after_setup_theme', 'ph_setup' );
  *
  * @global int $content_width
  */
-function ph_content_width() {
+function vnv_content_width() {
 	$GLOBALS['content_width'] = apply_filters( 'content_width', 1200 );
 }
-add_action( 'after_setup_theme', 'ph_content_width', 0 );
+add_action( 'after_setup_theme', 'vnv_content_width', 0 );
 
 /**
  * Set excerpt display.
@@ -70,12 +70,4 @@ function vnv_custom_excerpt_length( $length ) {
     return 18;
 }
 add_filter( 'excerpt_length', 'vnv_custom_excerpt_length' );
-
-/**
- * Remove Add Media Button
- */
-function remove_add_media_buttons(){
-  remove_action( 'media_buttons', 'media_buttons' );
-}
-add_action('admin_head', 'remove_add_media_buttons');
 ?>

@@ -30,9 +30,6 @@
   <div class="single_post-the_content">
         
     <?php 
-    //Post Images
-    get_template_part('template_parts/loop_content', 'post_media');
-
     //The Content
     the_content();    
     ?>

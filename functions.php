@@ -27,7 +27,7 @@ include_once('includes/get_badge.php' );
 //Custom Function to get a with a limited character count
 include_once('includes/get_limited_title.php' );
 
-//Media Attribution and Other updates
+//Custom Captions and other Media Settings
 include_once('includes/media_settings.php' );
 
 ?>

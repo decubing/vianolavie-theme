@@ -29,5 +29,25 @@ jQuery(document).ready(function($) {
   //Initialize Search Expand  
   $('.site_search-form').expandSearch();
 
-
+  //Place Image Credit
+  if ($('.single_post-the_content img, .loop_content-single_page img').attr('data-credit')) {
+    $( '.single_post-the_content img, .loop_content-single_page img' ).each(function() {
+      
+      //Set Credit
+      var credit = $(this).data('credit');
+   
+      //Credit Conditions
+      if( $(this).parent().hasClass('wp-caption')){
+        
+        //Credits for images with caption   
+        $(this).parent().append('<p class="wp-caption-text meta_title">'+credit+'</p>'); 
+      }else{
+        
+        //Credits for images without captions
+        var image_classes = $(this).attr('class');
+        $(this).wrap( '<div class="wp-caption '+ image_classes +'"></div>');
+        $(this).parent().append('<p class="wp-caption-text meta_title">'+credit+'</p>'); 
+      }
+    });
+  }
 });

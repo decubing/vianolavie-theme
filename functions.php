@@ -33,4 +33,10 @@ include_once('includes/media_settings.php' );
 //Custom Author Info Area
 include_once('includes/get_author_info.php' );
 
+//Custom Status Settings
+include_once('includes/custom_status.php' );
+
+//Cron Functions
+include_once('includes/cron_functions.php' );
+
 ?>

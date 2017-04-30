@@ -13,13 +13,13 @@
     @media (max-width: $screen-small) {
       display: block;
     }
-    .top_content-voice_of_the_week, .top_content-recent_posts{
+    .top_content-featured_voice, .top_content-recent_posts{
       @extend .table-cell;
       @media (max-width: $screen-small) {
         display: block;
       }
     }    
-    .top_content-voice_of_the_week{
+    .top_content-featured_voice{
       width: 65%;
       padding-right: $padding-standard;
       @media (max-width: $screen-medium) {
@@ -29,7 +29,7 @@
         width: 100%;
         padding-right: 0;
       }
-      .voice_of_the_week-label{
+      .featured_voice-label{
         position: absolute;
         z-index: 3;
         display: inline-block;

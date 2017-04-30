@@ -39,8 +39,8 @@
         <?php get_badge($listed_post->ID);?>   
            
       </span>
-      <span class="listed_post-h3"><?php echo $listed_post_title; ?> <!-- impose character limit --></span>
-      <span class="listed_post-meta_title"><?php echo $listed_post_subtitle; ?> <!-- impose character limit --></span>
+      <span class="listed_post-h3"><?php echo $listed_post_title; ?></span>
+      <span class="listed_post-meta_title"><?php echo $listed_post_subtitle; ?></span>
       
       <?php if( get_field('media_type', $listed_post->ID) ) echo '<span class="listed_post-button_play"><i class="fa fa-play-circle-o"></i></span>';?>
       

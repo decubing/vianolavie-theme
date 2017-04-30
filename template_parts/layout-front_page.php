@@ -7,15 +7,24 @@ if(is_front_page()):
 
 <div class="layout-front_page">
   <div class="front_page-top_content">
-    <div class="top_content-voice_of_the_week">
-      <div class="voice_of_the_week-label">
-        Voice of the Week
+    <div class="top_content-featured_voice">
+      <div class="featured_voice-label">
+        
+        <?php
+        //Featured Voice Label
+        if(get_field('featured_voice_label')){
+          the_field('featured_voice_label');
+        }else{
+          echo 'Featured Voice';
+        }
+        ?>
+        
       </div>
-      <div class="voice_of_the_week-loop_content">
+      <div class="featured_voice-loop_content">
         
         <?php
         //Voice of the Week Loop
-        $post_object = get_field('voice_of_the_week');
+        $post_object = get_field('featured_voice');
         if( $post_object ){
           $post = $post_object;
           setup_postdata( $post );

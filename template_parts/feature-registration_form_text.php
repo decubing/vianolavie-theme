@@ -1,6 +1,4 @@
-<?php 
-if(is_page('register')):
-?>
+<?php if(is_page('register') && !is_user_logged_in()): ?>
 
 <div class="feature-registration_form_text">
   

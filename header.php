@@ -21,15 +21,26 @@
           <div class="mobile_toggle-action"><i class="fa fa-bars"></i></div>
         </div>
         <div class="content-navigation">
-          <div class="navigation-tag_line">
-            Talking about life &amp; culture in New Orleans
+          <div class="navigation-upper_content">
             
             <?php
+
+            //Tagline
+            if(get_bloginfo('description'))
+              echo '<div class="upper_content-description">' . get_bloginfo('description') . '</div>';
+      
             //Conditional Logged in Info
             if(is_user_logged_in()){
-             echo '<div class="tag_line-user">Hello '.wp_get_current_user()->user_login.'! <a class="user-logout" href="'.wp_logout_url().'">Logout</a></div>';
+              
+              //User Info
+              echo '<div class="upper_content-user">
+                <div class="user-name">Hello '.wp_get_current_user()->user_login.'!</div> <a class="user-logout" href="'.wp_logout_url().'">Logout</a></div>';
+              
             }else{
-              echo '<a class="tag_line-button" href="'.get_permalink( get_page_by_path( 'contribute') ).'"><img alt="Talk to Us" src="'.get_template_directory_uri().'/images/button-talk_to_us.svg"></a>';
+              
+              //Login Or Signup Buttons
+              echo '<a class="upper_content-signup" href="'.get_permalink( get_page_by_path( 'register') ).'">Signup</a> <a class="upper_content-login" href="'. wp_login_url() .'">Login</a>';
+              
             }
             ?>
                         

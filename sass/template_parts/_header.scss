@@ -48,27 +48,27 @@
         overflow: hidden;
         height: 0;
       }        
-      .navigation-tag_line{
-        font-family: $font-family-Lobster;
-        color: $color-base;
-        font-size: $font-size-larger;
-        padding: $padding-small 0;
+      .navigation-upper_content{
+        padding: $padding-smaller 0;
         border-bottom: $border-standard;
         @media only screen and (max-width: $screen-small) {
           padding: $margin-standard 0;
+          margin-top: $margin-standard;
+          border-top: $border-standard;
         }
-        .tag_line-button{
-          float: right;
-          img{
-            width: 85px;
-            height: 30px;
+        .upper_content-description{
+          display: inline-block;
+          font-family: $font-family-Lobster;
+          color: $color-base;
+          font-size: $font-size-larger;
+          @media only screen and (max-width: $screen-small){
+            display: block !important;
+            text-align: center;
           }
         }
-        .tag_line-user{
+        .upper_content-user{
           display: inline-block;
           float: right;
-          font-family: $font-family-Roboto;
-          font-size: $font-size-small;
           @media only screen and (max-width: $screen-smallest) {
             display: block;
             float: none;
@@ -77,15 +77,35 @@
             background: $color-bg-footer;
             text-align: center;
           }
+          .user-name{
+            @extend .meta_title;
+            font-size: $font-size-small;
+            display: inline-block;
+          }
           .user-logout{
             @extend .button, .button-small;
-            padding: 4px;
             margin-left: 10px;
             @media only screen and (max-width: $screen-small) {
               display: inline-block !important;
               width: inherit !important;
               margin: 0 0 0 10px;
             }
+          }
+        }
+        .upper_content-login, .upper_content-signup{
+          @extend .button, .button-small;
+          float: right;
+          @media only screen and (max-width: $screen-small) {
+            font-size: $font-size-larger !important;
+          }
+        }
+        .upper_content-signup{
+          @extend .button-red;
+          margin-left: $margin-smaller;
+          @media only screen and (max-width: $screen-small) {
+            margin-left: 0!important;
+            margin-top: $margin-standard;
+            
           }
         }
       }

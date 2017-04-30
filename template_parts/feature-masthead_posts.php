@@ -6,8 +6,8 @@
   <a href="#" class="masthead_posts-control_prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
   <img class="masthead_posts-swipe" src="<?php echo get_template_directory_uri(); ?>/images/icon-swipe_to_browse.png">
   <div class="masthead_posts-slider">
-      <?php  
   
+  <?php  
   //Start Loop  
   while ( have_rows('masthead_posts-slider') ) : the_row(); 
   
@@ -31,7 +31,6 @@
       $listed_post_image    = get_sub_field('slider-listed_post-image')['url'];
       $listed_post_link     = get_sub_field('slider-listed_post-link');      
     }
-    
   ?>
   
     <a class="slider-listed_post" style="background-image:url(<?php echo $listed_post_image; ?>)" href="<?php echo $listed_post_link; ?>">

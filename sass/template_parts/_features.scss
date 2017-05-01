@@ -64,6 +64,7 @@
       }
       .listed_post-overlay {
         @extend .image_overlay;
+        z-index: 2;
       }
       .listed_post-h3 {
         @extend .h3;
@@ -84,16 +85,29 @@
       }
       .listed_post-button_play, .listed_post-h3, .listed_post-meta_title {
         position: absolute;
-        z-index: 1;
+        z-index: 3;
         text-align: center;
         left: 0;
         width: 100%;
         text-shadow: $text-shadow-standard;
       }
-
+        .listed_post-image, .listed_post-unscaled_image{
+          height: 100%;
+          width: 100%;
+          background-repeat: no-repeat;
+          background-position: center center;
+          overflow: hidden;
+          position: absolute;
+        }
+        .listed_post-image{
+          background-size: cover;          
+        }
+        .listed_post-unscaled_image{
+          z-index: 1;
+          background-size: auto 90%;
+        }
       .listed_post-meta_title {
         @extend .meta_title;
-
         bottom: 20px;
         color: $color-white;
       }

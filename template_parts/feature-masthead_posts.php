@@ -25,6 +25,7 @@
       $listed_post_subtitle = get_the_category($listed_post->ID)[0]->name;
       $listed_post_image    = wp_get_attachment_image_src(get_post_thumbnail_id($listed_post->ID), 'medium')[0];
       $listed_post_link     = get_permalink($listed_post->ID);      
+      $scale_featured_image = get_field('scale_featured_image', $listed_post->ID);
     }elseif(get_sub_field('slider-listed_post-type') == 'Other Content or Link'){
       $listed_post_title    = get_sub_field('slider-listed_post-title');
       $listed_post_subtitle = get_sub_field('slider-listed_post-subtitle');
@@ -32,21 +33,27 @@
       $listed_post_link     = get_sub_field('slider-listed_post-link');      
     }
   ?>
-  
-    <a class="slider-listed_post" style="background-image:url(<?php echo $listed_post_image; ?>)" href="<?php echo $listed_post_link; ?>">
-      <span class="listed_post-badge">
-      
-        <?php get_badge($listed_post->ID);?>   
-           
-      </span>
-      <span class="listed_post-h3"><?php echo $listed_post_title; ?></span>
-      <span class="listed_post-meta_title"><?php echo $listed_post_subtitle; ?></span>
-      
+
+  <a class="slider-listed_post" href="<?php echo $listed_post_link; ?>"> 
+    
+    <div class="listed_post-badge"><?php get_badge($listed_post->ID);?> </div>
+
+    <div class="listed_post-h3"><?php echo $listed_post_title; ?></div>
+    <div class="listed_post-meta_title"><?php echo $listed_post_subtitle; ?></div>
+    <?php 
+      //Unscaled Feature Image  
+      if($scale_featured_image)
+        echo  '<div class="listed_post-unscaled_image" style="background-image:url(' . $listed_post_image . '"></div>';
+      ?>
+
+    <div class="listed_post-image <?php if($scale_featured_image) echo 'effect-blur';?>" style="background-image:url( <?php echo $listed_post_image; ?> )"></div>
+    
       <?php if( get_field('media_type', $listed_post->ID) ) echo '<span class="listed_post-button_play"><i class="fa fa-play-circle-o"></i></span>';?>
-      
-      <span class="listed_post-overlay"></span>
-      
-    </a>
+
+    <div class="listed_post-overlay"></div>
+
+  </a>
+
 
   <?php 
   

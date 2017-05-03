@@ -1,5 +1,5 @@
 //Masthead Posts
-.feature-masthead_posts {
+.feature-masthead_scroller {
   position: relative;
   padding: 0;
   white-space: nowrap;
@@ -9,7 +9,7 @@
   @media only screen and (max-width: $screen-small) {
   	height: 15em;
   }
-  .masthead_posts-control_prev, .masthead_posts-control_next {
+  .masthead_scroller-control_prev, .masthead_scroller-control_next {
     position: absolute;
     top: 40%;
     z-index: 999;
@@ -25,13 +25,13 @@
     opacity: 0.8;
     cursor: pointer;
   }
-  .masthead_posts-control_next {
+  .masthead_scroller-control_next {
     right: 0;
   }
-  .masthead_posts-control_prev {
+  .masthead_scroller-control_prev {
     right: 97.6vw;
   }
-  .masthead_posts-swipe {
+  .masthead_scroller-swipe {
   	position: absolute;
     z-index: 999;
     top: 25%;
@@ -44,7 +44,7 @@
 	  }
   }
 
-  .masthead_posts-slider {
+  .masthead_scroller-slider {
     height: 100%;
     position: relative;
     .slider-listed_post {
@@ -82,6 +82,7 @@
         position: absolute;
         right: 20px;
         top: 20px;
+        z-index: 3;
       }
       .listed_post-button_play, .listed_post-h3, .listed_post-meta_title {
         position: absolute;

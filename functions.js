@@ -9,8 +9,8 @@ jQuery(document).ready(function($) {
     $( '.header, .feature-archive_masthead' ).wrapAll( "<div class='stickyarea'></div>" );
     $('.header').stick_in_parent();
   }
-  if($('.feature-masthead_posts').length){
-    $( '.header, .feature-masthead_posts' ).wrapAll( "<div class='stickyarea'></div>" );
+  if($('.feature-masthead_scroller').length){
+    $( '.header, .feature-masthead_scroller' ).wrapAll( "<div class='stickyarea'></div>" );
     $('.header').stick_in_parent();
   }
   if($('.layout-single').length){
@@ -21,7 +21,7 @@ jQuery(document).ready(function($) {
   $('.mobile_toggle-action').toggleMobileNav();
 
   //Initialize Masthead Slider
-  $('.feature-masthead_posts').mastheadSlider();
+  $('.feature-masthead_scroller').mastheadSlider();
 
   //Initialize AutoResize
   //autosize($('textarea'));

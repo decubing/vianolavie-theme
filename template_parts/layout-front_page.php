@@ -2,7 +2,7 @@
 if(is_front_page()):
 
   //Masthead Slider Feature
-  get_template_part('template_parts/feature', 'masthead_posts');
+  get_template_part('template_parts/feature', 'masthead_scroller');
 ?>
 
 <div class="layout-front_page">
@@ -23,14 +23,17 @@ if(is_front_page()):
       <div class="featured_voice-loop_content">
         
         <?php
-        //Voice of the Week Loop
-        $post_object = get_field('featured_voice');
-        if( $post_object ){
-          $post = $post_object;
-          setup_postdata( $post );
+        //Featured Voice Loop
+        $featured_voice = get_posts( array(
+          'post_type'    => 'post',
+          'post_status'  => 'publish',
+          'meta_key'     => 'front_page_placement',
+          'meta_value'   => 'Featured Voice',
+          'posts_per_page' => 1
+        ));
+        foreach ( $featured_voice as $post) : setup_postdata( $post );
           get_template_part('template_parts/loop_content','listed_large'); 
-          wp_reset_postdata();
-        }
+        endforeach; wp_reset_postdata();
         ?>
       
       </div>    

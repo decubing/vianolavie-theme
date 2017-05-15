@@ -48,7 +48,9 @@
     position: absolute;
     z-index: 10;
     right: $padding-standard;
-    top: $padding-standard;
+  }
+  .featured_image-badge{
+    top: $padding-standard;    
   }
   .featured_image-play_button{
     @extend .button-play;

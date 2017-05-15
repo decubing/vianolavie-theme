@@ -13,16 +13,25 @@ global $post;
   <div class="recent_posts-loop_content">
     
     <?php 
+      
+    //Limit the Amount of Posts based on Sticky Amount
+    $sticky_posts = count(get_option('sticky_posts'));
+    $post_per_page = 3;
+    if($sticky_posts > 0){
+      $post_per_page = 3 - $sticky_posts;
+    }
+    
     //Begin Recent Posts Loop
     $the_query = new WP_Query( array(
       'post_type' => 'post',
-      'posts_per_page' => 3,
+      'posts_per_page' => $post_per_page,
       'post__not_in' => array($post->ID)
     ));
     if ( $the_query->have_posts() ): while ( $the_query->have_posts() ) : $the_query->the_post();
     
     //Repeating Variables
     $scale_featured_image = get_field('scale_featured_image');
+    
     ?>
 
     <a class="loop_content-listed_post" href="<?php the_permalink();?>">

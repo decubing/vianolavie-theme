@@ -19,11 +19,10 @@ if( is_category() || is_tag() ){
 ?>
 
 <div class="feature-archive_masthead row">
-	<div class="archive_masthead-background_image" style="background-image:url(<?php echo $archive_image; ?>)"></div> <!-- Pull a random image from a post in the category. -->	
-	<div class="archive_masthead-masthead_content container">
+	<div class="archive_masthead-background_image" style="background-image:url(<?php echo $archive_image; ?>)"></div>
+  <div class="archive_masthead-masthead_content container">
 		
 	  <?php 
-		  
 	  // Archive Content
 	  if($archive_image)
 	    echo '<div class="masthead_content-archive_image" style="background-image:url(' .$archive_image. ')"></div>';
@@ -38,7 +37,6 @@ if( is_category() || is_tag() ){
       }
   	  echo '</div>';      
 	  }
-
 	  ?>
 	  		
 	</div>

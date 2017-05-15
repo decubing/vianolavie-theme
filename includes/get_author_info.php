@@ -10,7 +10,7 @@ function get_author_info($author_id){
 
   
   //Find and Remove Unnecessary 
-  $search_restricted_roles = array_search('hello', $author_roles);
+  $search_restricted_roles = array_search('bbp_participant', $author_roles);
   unset( $author_roles[$search_restricted_roles] );
   $clean_author_roles = implode( ', ',$author_roles);
 

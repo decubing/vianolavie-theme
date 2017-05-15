@@ -234,7 +234,7 @@
 //Suggested Content
 .feature-suggested_content {
   width: 100%;
-  padding-top: $padding-standard;
+  padding: $padding-standard 0;
   .suggested_content-title{
     @extend .section_title;
     margin: 0 1%;

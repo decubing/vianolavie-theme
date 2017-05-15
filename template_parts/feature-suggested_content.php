@@ -10,7 +10,8 @@
     'post__not_in'  => get_field('not_suggested_content'),
     'post_type'     => 'post',
     'posts_per_page'=> 6,
-    'offset'        => 3
+    'offset'        => 3,
+    'ignore_sticky_posts' => 1
   ));
   if ( $the_query->have_posts() ){
     while ( $the_query->have_posts() ){ 

@@ -3,20 +3,17 @@
   background-color: $color-bg-footer;
   padding: 2em $padding-smaller;
   font-size: $font-size-larger;
-  
+  border-top: $border-standard;
   @media (max-width: $screen-smallest) {
     text-align: initial;
   }
-
   .footer-navigation {
     display: table;
-
     .navigation-title {
       display: table-cell;
       vertical-align: middle;
       text-decoration: none;
       color: $color-secondary;
-
       @media (max-width: $screen-smallest) {
         display: inherit;
         border-bottom: 1px $color-active solid;
@@ -24,7 +21,6 @@
         width: 60%;
       }
     }
-
     ul {
       margin: 0;
       padding: 0;

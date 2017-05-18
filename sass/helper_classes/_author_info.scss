@@ -6,6 +6,7 @@
   font-size: $font-size-medium;
   font-family: $font-family-Roboto;
   display: inline-block;
+  padding-bottom: $padding-standard;
   &:nth-of-type(1){
     margin-left: 0;
   }
@@ -14,11 +15,11 @@
     margin-right: .5em;
     display: inline-block;
   }
-  .the_author-name_and_roll{
+  .the_author-name_and_role{
     display: inline-block;
-    padding-top: $padding-small;
+    padding: $padding-small $padding-small 0 0;
     vertical-align: top;
-    .name_and_roll-the_role{
+    .name_and_role-the_role{
       color: $color-secondary;            
       display: block;
     }

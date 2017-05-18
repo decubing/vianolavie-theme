@@ -138,7 +138,7 @@
     }
   }
   .listed_large-post_footer {
-    padding: $padding-standard;
+    padding: $padding-standard $padding-standard 0 $padding-standard;
     font-family: $font-family-Roboto;
     background-color: $color-bg-footer;
     display: table;

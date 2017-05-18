@@ -68,8 +68,8 @@ $scale_featured_image = get_field('scale_featured_image');
       //Begin Authors
       $authors = get_coauthors();    
       foreach ($authors as $author):
-      
-        echo get_author_info($author->ID);
+
+        echo get_author_info($author);
 
       //End Authors
       endforeach;

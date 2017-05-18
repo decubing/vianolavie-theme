@@ -50,8 +50,26 @@ $scale_featured_image = get_field('scale_featured_image');
       if(is_category()){
         
         //Begin Authors
-        coauthors_posts_links( '', ', ', '', '');
+      //Begin Authors
+      $authors = get_coauthors();    
+      $numItems = count($authors);
+      $i = 0;
+      foreach ($authors as $author):
         
+        //Conditionally show link to author
+        if($author->type == 'guest-author'){
+          echo $author->display_name;
+        }else{
+          echo '<a class="meta-author_link" href="'.get_author_posts_url($author->ID).'">'.$author->display_name.'</a>';
+        }        
+        
+        //Conditionally add comma
+        if(++$i != $numItems)
+          echo ', ';
+
+      //End Authors
+      endforeach;
+              
       }else{
         echo '<a href="' . esc_url( get_category_link( get_the_category()[0]->term_id ) ) . '">' . esc_html( get_the_category()[0]->name ) . '</a>';
       }

@@ -18,7 +18,7 @@ function get_author_info($author){
     return
     '<div class="author_info-the_author">
       <span class="the_author-avatar" style="background-image:url(' . $avatar_url . ')"></span>
-      <span class="the_author-name_and_role">' . $author_display_name . '<span class="name_and_role-the_role">Guest Author</span></span>
+      <span class="the_author-name_and_role">' . $author_display_name . '<span class="name_and_role-the_role">Author</span></span>
     </div>';
   }else{
     return

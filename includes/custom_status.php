@@ -1,17 +1,19 @@
 <?php
 // Register Custom Status
-add_action( 'init', 'custom_post_status', 0 );
 function custom_post_status() {
+
 	$args = array(
-		'label'                     => 'archived',
-		'label_count'               => _n_noop( 'Archived <span class="count">(%s)</span>', 'Archived <span class="count">(%s)</span>' ),
-		'private'                 => true,
-		'show_in_admin_all_list'    => false,
+		'label'                     => _x( 'Archived', 'Status General Name', 'vnv' ),
+		'label_count'               => _n_noop( 'Archived (%s)',  'Archived (%s)', 'vnv' ), 
+		'public'                    => true,
+		'show_in_admin_all_list'    => true,
 		'show_in_admin_status_list' => true,
 		'exclude_from_search'       => false,
 	);
 	register_post_status( 'archived', $args );
+
 }
+add_action( 'init', 'custom_post_status', 0 );
 
 // Add Custom Post Status to Post Dropdown
 add_action('admin_footer-post.php', 'jc_append_post_status_list');

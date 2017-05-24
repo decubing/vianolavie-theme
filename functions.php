@@ -33,10 +33,13 @@ include_once('includes/media_settings.php' );
 //Custom Author Info Area
 include_once('includes/get_author_info.php' );
 
-//Custom Status Settings
-include_once('includes/custom_status.php' );
+//Schedule Archive Status
+include_once('includes/schedule_archive.php' );
 
-//Cron Functions
-include_once('includes/cron_functions.php' );
+//Customize the User's ability to publish
+include_once('includes/role_restrictions.php');
+
+//EditFlow Customizations
+include_once('includes/edit_flow_customizations.php');
 
 ?>

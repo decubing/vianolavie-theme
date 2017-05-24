@@ -1,8 +1,5 @@
 <?php
-
-//======================================================================
-//Auto Archive Posts on Scheduled Date
-//======================================================================
+//Add "Archived" Status on Scheduled Date
 add_action(  'save_post',  'on_vianolavie_post_update', 10, 2 );
 function on_vianolavie_post_update($post_id, $post ){
   

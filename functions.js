@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
   $('.feature-masthead_scroller').mastheadSlider();
 
   //Initialize AutoResize
-  //autosize($('textarea'));
+  autosize($('textarea'));
 
   //Initialize Search Expand  
   $('.site_search-form').expandSearch();

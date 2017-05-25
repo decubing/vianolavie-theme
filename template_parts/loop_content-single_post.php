@@ -33,75 +33,18 @@
   </div>
   <div class="single_post-sharing_options">
     
-      <?php
-      //Sharing Options
-      get_template_part('template_parts/feature', 'sharing_options');
-      ?>
+    <?php
+    //Sharing Options
+    get_template_part('template_parts/feature', 'sharing_options');
+    ?>
       
   </div>
-  <!--
   <div class="single_post-comments">
-    <h3>Comments</h3>
-    <div class="single_post-comments">
-      <div class="comments-comment_entry row">
-        <form class="comment_entry-comment_form">
-          <div class="comment_form-input_group">
-            <textarea class="input_group-input"></textarea>
-            <span class="input_group-highlight"></span>
-            <span class="input_group-bar"></span>
-            <label class="input_group-label">Your Comment</label>
-          </div>
-          <button class="button-red comment_form-submit">Submit</button> 
-          <button class="button comment_entry-cancel">Cancel</button>
-        </form>
-        <div class="comment_entry-user_favicon " style="background-image: url(http://clients.decubing.com/vianolavie/wp-content/uploads/2016/07/sample_thumbnail.jpg)"></div>
-      </div>
-      <div class="comments-comment_list">
-        <div class="comment_list-single_comment table">
-          <div class="single_comment-comment_meta table-cell">
-            <div class="comment_meta-comment_date">10/22/17</div>
-            <div class="comment_meta-comment_time">10:22 AM</div>
-          </div>
-          <div class="single_comment-comment_content table-cell">
-            <p>Secondary line text lorem ipsum sic dapibus, neque id cursus faucibusas sadf asdf asd fas dfasdfasfasd fasdfasdfasdfasd fasfsdf</p>
-            <p>Secondary line text lorem ipsum sic dapibus, neque id cursus faucibusas sadf asdf asd fas dfasdf asfasdfasdfasdfasd fasd fasfsdf</p>
-  
-            <div class="comment_content-comment_author">Joe Smith</div>
-          </div>
-          <div class="single_comment-user_favicon no_mobile">
-            <div class="user_favicon-image image-circular table-cell" style="background-image: url(http://clients.decubing.com/vianolavie/wp-content/uploads/2016/07/sample_thumbnail.jpg)"></div>
-          </div>
-        </div>
-        <div class="comment_list-single_comment table">
-          <div class="single_comment-comment_meta table-cell">
-            <div class="comment_meta-comment_date">10/22/17</div>
-            <div class="comment_meta-comment_time">10:22 AM</div>
-          </div>
-          <div class="single_comment-comment_content table-cell">
-             <p>Secondary line text lorem ipsum sic dapibus, neque id cursus faucibusas sadf asdf asd fas dfasdf asfasdfasd fasdfasdf asdfasfsdf</p>
-            <p>Secondary line text lorem ipsum sic dapibus, neque id cursus faucibusas sadf asdf asd fas dfasdfasfasdfasdf asdfasd fasdfasfsdf</p>
-            <div class="comment_content-comment_author">Joe Smith</div>
-          </div>
-          <div class="single_comment-user_favicon no_mobile">
-            <div class="user_favicon-image image-circular table-cell" style="background-image: url(http://clients.decubing.com/vianolavie/wp-content/uploads/2016/07/sample_thumbnail.jpg)"></div>
-          </div>
-        </div>
-        <div class="comment_list-single_comment table">
-          <div class="single_comment-comment_meta table-cell">
-            <div class="comment_meta-comment_date">10/22/17</div>
-            <div class="comment_meta-comment_time">10:22 AM</div>
-          </div>
-          <div class="single_comment-comment_content table-cell">
-            <p>Secondary line text lorem ipsum sic dapibus, neque id cursus faucibusas sadf asdf asd fas dfasdfasfasd fasdfas dfasdfas dfasfsdf</p>
-            <p>Secondary line text lorem ipsum sic dapibus, neque id cursus faucibusas sadf asdf asd fas dfasdfasfasdfasd fasdfasd fasdfasf sdf</p>
-            <div class="comment_content-comment_author">Joe Smith</div>
-          </div>
-          <div class="single_comment-user_favicon no_mobile">
-            <div class="user_favicon-image image-circular table-cell" style="background-image: url(http://clients.decubing.com/vianolavie/wp-content/uploads/2016/07/sample_thumbnail.jpg)"></div>
-          </div>
-        </div>
-      </div>
-    </div>
+    
+    <?php
+    //Sharing Options
+    get_template_part('template_parts/feature', 'comments');
+    ?>
+      
   </div>
-  -->
 </div>

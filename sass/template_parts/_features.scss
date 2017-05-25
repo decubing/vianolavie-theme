@@ -314,3 +314,51 @@
     font-weight:$font-weight-bold;
   }
 }
+
+//Comments
+.feature-comments {
+  .comments-comment_list {
+    .comment_list-single_comment {
+      @extend .table;
+      width: 100%;
+      &:nth-child(odd) {
+        background: $color-bg-footer;
+      }
+      .single_comment-comment_meta,  .single_comment-comment_content, .single_comment-user_favicon{
+        @extend .table-cell;        
+        vertical-align: middle;
+         padding: $padding-smaller;
+      }
+      .single_comment-comment_meta {
+        width: 15%;
+        color: $color-secondary;
+        .comment_meta-comment_time {
+          font-size: $font-size-small;
+        }
+      }
+      .single_comment-comment_content {
+        width: 70%;
+        p {
+          margin-top: 0;
+        }
+        .comment_content-comment_author {
+          color: $color-secondary;
+          font-size: $font-size-small;
+        }
+      }
+      .single_comment-user_favicon {
+        width: 15%;
+        margin: $padding-smaller;
+        @extend .table-cell;
+        @media (max-width: $screen-small) {
+          display: none;  
+        }
+        .user_favicon-image{
+          @extend .image-circular;
+          margin-left: $padding-smaller;
+        }
+      }
+    }
+  }
+}
+  

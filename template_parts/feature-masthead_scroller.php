@@ -29,7 +29,6 @@ if ( !empty($posts) || !empty($categories_query) ):
   foreach ( $posts as $post ) : setup_postdata( $post );
   
     //Set variables depending on the type of content
-    $post_title    = get_limited_title($post->ID); 
     $post_image    = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'medium')[0];
     $scale_featured_image  = get_field('scale_featured_image', $listed_post->ID);
 

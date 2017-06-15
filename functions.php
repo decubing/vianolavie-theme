@@ -36,7 +36,7 @@ include_once('includes/get_author_info.php' );
 //Schedule Archive Status
 include_once('includes/schedule_archive.php' );
 
-//Customize the User's ability to publish
-include_once('includes/role_restrictions.php');
+//Add and define Cusotm Roles
+include_once('includes/custom_roles.php');
 
 ?>

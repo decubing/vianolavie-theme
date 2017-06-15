@@ -39,7 +39,4 @@ include_once('includes/schedule_archive.php' );
 //Customize the User's ability to publish
 include_once('includes/role_restrictions.php');
 
-//EditFlow Customizations
-include_once('includes/edit_flow_customizations.php');
-
 ?>

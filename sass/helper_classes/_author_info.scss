@@ -2,14 +2,10 @@
   color: $color-primary;
   text-transform: capitalize;
   text-decoration: none;
-  margin-left: $margin-standard;
   font-size: $font-size-medium;
   font-family: $font-family-Roboto;
   display: inline-block;
-  padding-bottom: $padding-standard;
-  &:nth-of-type(1){
-    margin-left: 0;
-  }
+  padding-right: $padding-small;
   .the_author-avatar{
     @extend .image-circular;
     margin-right: .5em;

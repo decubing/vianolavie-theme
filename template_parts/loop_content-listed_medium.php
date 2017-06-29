@@ -10,7 +10,7 @@ $scale_featured_image = get_field('scale_featured_image');
   
   <a class="listed_medium-featured_image " href="<?php the_permalink(); ?>"> 
     
-    <div class="featured_image-badge"><?php get_badge($post->ID, 'badge-small'); ?></div>
+    <div class="featured_image-badge"><?php vnv_badge($post->ID, 'badge-small'); ?></div>
 
     <div class="featured_image-title"><?php the_title();?></div>
 
@@ -35,7 +35,7 @@ $scale_featured_image = get_field('scale_featured_image');
       <?php the_title();?>
     </div>
     <div class="excerpt-badge">
-      <?php get_badge($post->ID, 'badge-small'); ?>
+      <?php vnv_badge($post->ID, 'badge-small'); ?>
     </div>
   </a>
 
@@ -49,29 +49,36 @@ $scale_featured_image = get_field('scale_featured_image');
       //Set Footer Meta
       if(is_category()){
         
-        //Begin Authors
-      //Begin Authors
-      $authors = get_coauthors();    
-      $numItems = count($authors);
-      $i = 0;
-      foreach ($authors as $author):
-        
-        //Conditionally show link to author
-        if($author->type == 'guest-author'){
-          echo $author->display_name;
-        }else{
-          echo '<a class="meta-author_link" href="'.get_author_posts_url($author->ID).'">'.$author->display_name.'</a>';
-        }        
-        
-        //Conditionally add comma
-        if(++$i != $numItems)
-          echo ', ';
-
-      //End Authors
-      endforeach;
+        //Show Author Info
+        $authors = get_coauthors();    
+        $numItems = count($authors);
+        $i = 0;
+        foreach ($authors as $author):
+          
+          //Conditionally show link to author
+          if($author->type == 'guest-author'){
+            echo $author->display_name;
+          }else{
+            echo '<a class="meta-author_link" href="'.get_author_posts_url($author->ID).'">'.$author->display_name.'</a>';
+          }        
+          
+          //Conditionally add comma
+          if(++$i != $numItems)
+            echo ', ';
+  
+        //End Authors
+        endforeach;
               
       }else{
-        echo '<a href="' . esc_url( get_category_link( get_the_category()[0]->term_id ) ) . '">' . esc_html( get_the_category()[0]->name ) . '</a>';
+        
+        //Show Category
+        if( !empty(get_the_category()) ){
+          echo '<a href="' . esc_url( get_category_link( get_the_category()[0]->term_id ) ) . '">' . esc_html( get_the_category()[0]->name ) . '</a>';
+        
+        //Or Show Page Type
+        }else{
+          echo get_post_type();
+        }
       }
       
       ?>

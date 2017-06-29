@@ -186,15 +186,14 @@
   padding: $padding-standard;
   .archive-loop_content{
     @extend .container;
-    text-align: justify;
-    text-align-last: justify;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     .loop_content-listed_medium{
-      text-align: left;
-      -moz-text-align-last: left;
-      text-align-last: left;
       width: 48%;
-      margin-right: 1%;
-      display: inline-block;
+      &:nth-of-type(odd){
+        margin-right: 2%; 
+      }
     }
   }
   .archive-notice{
@@ -203,9 +202,8 @@
   @media only screen and (max-width: $screen-small) {
     .archive-loop_content{
       .loop_content-listed_medium{
-        margin-right: 0;
+        margin-right: 0 !important;
         width: 100%;
-        float: left;
       }
     }
     .archive-notice{

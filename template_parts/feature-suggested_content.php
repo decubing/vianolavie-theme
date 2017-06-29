@@ -11,7 +11,15 @@
     'post_type'     => 'post',
     'posts_per_page'=> 6,
     'offset'        => 3,
-    'ignore_sticky_posts' => 1
+    'ignore_sticky_posts' => 1,
+    'meta_query' => array(
+  		array(
+  			'key'     => 'front_page_placement',
+  			'value'   => array( 'Masthead Scroller', 'Featured Voice' ),
+  			'compare' => 'NOT IN',
+  		),
+  	),
+
   ));
   if ( $the_query->have_posts() ){
     while ( $the_query->have_posts() ){ 

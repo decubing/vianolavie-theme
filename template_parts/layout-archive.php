@@ -1,6 +1,6 @@
 <?php 
 
-if(is_archive() || is_search()):
+if(is_archive() || is_search() || is_home()):
   
 //Masthead Title Feature
 get_template_part('template_parts/feature', 'archive_masthead');
@@ -20,19 +20,20 @@ get_template_part('template_parts/feature', 'archive_masthead');
     <div class="archive-loop_content"> 
 
       <?php 
-      
       while(have_posts()): the_post();
       
         //Medium Post in Loop
         get_template_part('template_parts/loop_content', 'listed_medium');
         
       endwhile;
-  
-      //Page Navigation in Loop
-      get_template_part('template_parts/loop_content', 'pagination');
-      
       ?>
       
+      <div class="loop_content-pagination">
+      <?php
+      //Page Navigation 
+      echo paginate_links();
+      ?>
+      </div>
     </div>
     
     <?php else: ?>

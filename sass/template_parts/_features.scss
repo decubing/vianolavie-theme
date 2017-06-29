@@ -182,9 +182,10 @@
   .recent_posts-title{
     @extend .section_title;
   }
-  .recent_posts-loop_content {
-    border: $border-standard;
-    .loop_content-listed_post{
+  .recent_posts-loop {
+    border-left: $border-standard;
+    border-right: $border-standard;
+    .loop-listed_post{
       position: relative;
       display: inline-block;
       width: 100%;
@@ -227,6 +228,16 @@
         right: 10px;
       }
 
+    }
+  }
+  .recent_posts-show_all{
+    background: $color-bg-footer;
+    padding: $padding-standard;
+    text-align: center;
+    border-left: $border-standard;
+    border-right: $border-standard;
+    .show_all-link{
+      @extend .button;
     }
   }
 }

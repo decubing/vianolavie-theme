@@ -47,13 +47,13 @@
         width: 100%;
         overflow: hidden;
         height: 0;
+        margin-top: 1em;
       }        
       .navigation-upper_content{
         padding: $padding-smaller 0;
         border-bottom: $border-standard;
         @media only screen and (max-width: $screen-small) {
           padding: $margin-standard 0;
-          margin-top: $margin-standard;
           border-top: $border-standard;
         }
         .upper_content-description{
@@ -61,7 +61,7 @@
           font-family: $font-family-Lobster;
           color: $color-base;
           font-size: $font-size-larger;
-          @media only screen and (max-width: $screen-small){
+          @media only screen and (max-width: $screen-smallest){
             display: block !important;
             text-align: center;
           }
@@ -95,14 +95,14 @@
         .upper_content-login, .upper_content-signup{
           @extend .button, .button-small;
           float: right;
-          @media only screen and (max-width: $screen-small) {
+          @media only screen and (max-width: $screen-smallest) {
             font-size: $font-size-larger !important;
           }
         }
         .upper_content-signup{
           @extend .button-red;
           margin-left: $margin-smaller;
-          @media only screen and (max-width: $screen-small) {
+          @media only screen and (max-width: $screen-smallest) {
             margin-left: 0!important;
             margin-top: $margin-standard;
             

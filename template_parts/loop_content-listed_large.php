@@ -12,7 +12,7 @@ $scale_featured_image = get_field('scale_featured_image');
     
     <div class="featured_image-badge">
       
-      <?php get_badge($post->ID); ?>
+      <?php vnv_badge($post->ID); ?>
       
     </div>
 
@@ -39,7 +39,7 @@ $scale_featured_image = get_field('scale_featured_image');
       if(!has_post_thumbnail() && !get_field('media_type', $post->ID)){
       ?>
       
-      <span class="title-badge"><?php get_badge($post->ID); ?></span>
+      <span class="title-badge"><?php vnv_badge($post->ID); ?></span>
       
       <?php
       }
@@ -60,20 +60,11 @@ $scale_featured_image = get_field('scale_featured_image');
       
     </div>
   </div>
-  <div class="listed_large-post_footer row">
+  <div class="listed_large-post_footer">
 
     <div class="post_footer-author_info">
       
-      <?php
-      //Begin Authors
-      $authors = get_coauthors();    
-      foreach ($authors as $author):
-
-        echo get_author_info($author);
-
-      //End Authors
-      endforeach;
-      ?>
+      <?php vnv_author_info(); ?>
       
     </div>
       

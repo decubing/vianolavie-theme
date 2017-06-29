@@ -4,7 +4,7 @@
  * Get title that is limited to 25 characters. 
  */
  
-function get_limited_title($post_id){
+function vnv_limited_title($post_id){
   
   //Set title and length
   $title = get_the_title($post_id);

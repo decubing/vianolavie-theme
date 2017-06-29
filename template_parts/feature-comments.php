@@ -9,7 +9,7 @@ if(comments_open()):
   //Comment Form
   $comment_settings = array(
     'logged_in_as' => '',
-     'must_log_in' => '<div class="comments-notice">' . sprintf( __( 'You must <a href="%s">login</a> to post a comment.' ),wp_login_url( apply_filters( 'the_permalink', get_permalink( $post_id ) ) )) . ' Need a ViaNolaVie account? <a href="'.get_permalink( get_page_by_path( 'register') ).'">Click here</a> to signup.</div>',
+     'must_log_in' => '<div class="comments-notice">' . sprintf( __( 'You must <a href="%s">login</a> to post a comment.' ),wp_login_url( apply_filters( 'the_permalink', get_permalink() ) )) . ' Need a ViaNolaVie account? <a href="'.get_permalink( get_page_by_path( 'register') ).'">Click here</a> to signup.</div>',
     'title_reply' => 'Comments',
     'comment_field' => '<div class="comment-input_group"><textarea class="input_group-input" id="comment" name="comment" aria-required="true"></textarea><span class="input_group-highlight"></span><span class="input_group-bar"></span><label class="input_group-label" for="comment">' . _x( 'Your Comment', 'noun' ) . '</label></div>' 
   ); 

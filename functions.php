@@ -22,16 +22,16 @@ include_once('includes/admin_notices.php' );
 include_once('includes/wysiwyg_settings.php' );
 
 //Custom Function to get acf post badges values
-include_once('includes/get_badge.php' );
+include_once('includes/vnv_badge.php' );
 
 //Custom Function to get a with a limited character count
-include_once('includes/get_limited_title.php' );
+include_once('includes/vnv_limited_title.php' );
 
 //Custom Captions and other Media Settings
 include_once('includes/media_settings.php' );
 
 //Custom Author Info Area
-include_once('includes/get_author_info.php' );
+include_once('includes/vnv_author_info.php' );
 
 //Schedule Archive Status
 include_once('includes/schedule_archive.php' );

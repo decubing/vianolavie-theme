@@ -67,7 +67,18 @@ add_filter( 'excerpt_more', 'vnv_excerpt_more' );
  * Set excerpt length.
  */
 function vnv_custom_excerpt_length( $length ) {
-    return 18;
+    return 13;
 }
 add_filter( 'excerpt_length', 'vnv_custom_excerpt_length' );
+
+/**
+ * Ignore Stickies on Home
+ */
+function vnv_ignore_sticky($query)
+{
+  if (is_home() && $query->is_main_query())
+    $query->set('ignore_sticky_posts', true);
+}
+add_action('pre_get_posts', 'vnv_ignore_sticky');
+
 ?>

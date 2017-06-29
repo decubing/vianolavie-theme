@@ -30,20 +30,22 @@ if ( !empty($posts) || !empty($categories_query) ):
   
     //Set variables depending on the type of content
     $post_image    = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'medium')[0];
-    $scale_featured_image  = get_field('scale_featured_image', $listed_post->ID);
+    
+    if(!empty($scale_featured_image))
+      $scale_featured_image  = get_field('scale_featured_image', $post->ID);
 
   ?>
 
     <a class="slider-listed_post" href="<?php the_permalink(); ?>"> 
       
-      <div class="listed_post-badge"> <?php get_badge($post->ID);?> </div>
+      <div class="listed_post-badge"> <?php vnv_badge($post->ID);?> </div>
   
-      <div class="listed_post-h3"><?php echo get_limited_title($post->ID); ?></div>
+      <div class="listed_post-h3"><?php echo vnv_limited_title($post->ID); ?></div>
       <div class="listed_post-meta_title"><?php echo get_the_category($post->ID)[0]->name; ?></div>
   
       <?php 
       //Unscaled Feature Image  
-      if($scale_featured_image)
+      if(!empty($scale_featured_image))
         echo  '<div class="listed_post-unscaled_image" style="background-image:url(' . $post_image . '"></div>';
       ?>
   
@@ -51,7 +53,7 @@ if ( !empty($posts) || !empty($categories_query) ):
       
       <?php 
       //Play Button
-      if( get_field('media_type', $listed_post->ID) ) 
+      if( get_field('media_type', $post->ID) ) 
         echo '<span class="listed_post-button_play"><i class="fa fa-play-circle-o"></i></span>';
       ?>
   

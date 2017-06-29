@@ -1,18 +1,11 @@
 <div class="loop_content-single_post">
   <div class="single_post-author_info">
   
-    <?php
-    //Begin Authors
-    $authors = get_coauthors();    
-    foreach ($authors as $author):
-       echo get_author_info($author);
-    //End Authors
-    endforeach;
-    ?>
+    <?php vnv_author_info();?>
     
     <div class="author_info-badge">
       
-      <?php if(get_badge($post->id)) echo get_badge($post->id);?>
+      <?php if(vnv_badge($post->id)) echo vnv_badge($post->id);?>
       
     </div>
   </div>

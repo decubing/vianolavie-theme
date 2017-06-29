@@ -14,6 +14,9 @@ if( is_category() || is_tag() ){
 }elseif(is_search()){
   $archive_title       = 'Search Results: "' . get_search_query() . '"';
   $archive_image       = get_template_directory_uri().'/images/icon-search.png';
+}elseif(is_home()){
+  $archive_title       = 'Recent Posts';
+  $archive_description = 'A full list of ViaNolaVie\'s most recent posts.';
 }
   
 ?>
@@ -24,13 +27,13 @@ if( is_category() || is_tag() ){
 		
 	  <?php 
 	  // Archive Content
-	  if($archive_image)
+	  if(!empty($archive_image))
 	    echo '<div class="masthead_content-archive_image" style="background-image:url(' .$archive_image. ')"></div>';
-	  if($archive_title)
+	  if(!empty($archive_title))
 	    echo '<div class="masthead_content-archive_title">' . $archive_title . '</div>';
-	  if($archive_description)
+	  if(!empty($archive_description))
 	    echo '<div class="masthead_content-archive_description">' . $archive_description . '</div>';
-	  if($subcategories){
+	  if(!empty($subcategories)){
   	  echo '<div class="masthead_content-subcategories">';
   	  foreach($subcategories as $subcategory) { 
         echo '<a class="subcategories-link" href="' . get_category_link( $subcategory->term_id ) . '" title="' . sprintf( __( "View all posts in %s" ), $subcategory->name ) . '" ' . '>' . $subcategory->name.'</a> ';

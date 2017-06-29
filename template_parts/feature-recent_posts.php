@@ -10,31 +10,50 @@ global $post;
   <div class="recent_posts-title">
     Recent Posts on ViaNolaVie
   </div>
-  <div class="recent_posts-loop_content">
     
-    <?php 
-      
-    //Limit the Amount of Posts based on Sticky Amount
-    $sticky_posts = count(get_option('sticky_posts'));
-    $post_per_page = 3;
-    if($sticky_posts > 0){
-      $post_per_page = 3 - $sticky_posts;
-    }
+  <?php 
     
-    //Begin Recent Posts Loop
+  //Limit the Amount of Posts based on Sticky Amount
+  $sticky_posts = count(get_option('sticky_posts'));
+  $post_per_page = 3;
+  if($sticky_posts > 0){
+    $post_per_page = 3 - $sticky_posts;
+  }
+  
+  //Set Query
+  if(is_front_page()){
     $the_query = new WP_Query( array(
       'post_type' => 'post',
       'posts_per_page' => $post_per_page,
-      'post__not_in' => array($post->ID)
+      'post__not_in' => array($post->ID),
+      'meta_query' => array(
+    		array(
+    			'key'     => 'front_page_placement',
+    			'value'   => array( 'Masthead Scroller', 'Featured Voice' ),
+    			'compare' => 'NOT IN',
+    		),
+    	),
     ));
-    if ( $the_query->have_posts() ): while ( $the_query->have_posts() ) : $the_query->the_post();
+  }else{
+    $the_query = new WP_Query( array(
+      'post_type' => 'post',
+      'posts_per_page' => $post_per_page,
+      'post__not_in' => array($post->ID),
+    ));
+  }
+  
+  //Begin Recent Posts Loop
+  if ( $the_query->have_posts() ): 
+  ?>
+  
+  <div class="recent_posts-loop">
     
-    //Repeating Variables
-    $scale_featured_image = get_field('scale_featured_image');
-    
+    <?php
+    //Show Listed Posts
+    while ( $the_query->have_posts() ) : $the_query->the_post();
     ?>
 
-    <a class="loop_content-listed_post" href="<?php the_permalink();?>">
+    <a class="loop-listed_post" href="<?php the_permalink();?>">
 
       <?php
       //Start Image for first post
@@ -44,10 +63,12 @@ global $post;
       <div class="listed_post-featured_image" href="<?php the_permalink(); ?>"> 
                 
         <?php 
-          //Scaled Feature Image  
-          if($scale_featured_image)
-            echo  '<div class="featured_image-unscaled_image" style="background-image:url(' . wp_get_attachment_image_src(get_post_thumbnail_id($post->id), 'large')[0]. '"></div>';
-          ?>
+        //Scaled Feature Image  
+        $scale_featured_image = get_field('scale_featured_image');
+
+        if($scale_featured_image)
+          echo  '<div class="featured_image-unscaled_image" style="background-image:url(' . wp_get_attachment_image_src(get_post_thumbnail_id($post->id), 'large')[0]. '"></div>';
+        ?>
     
         <div class="featured_image-image <?php if($scale_featured_image) echo 'effect-blur';?>" style="background-image:url( <?php echo wp_get_attachment_image_src(get_post_thumbnail_id($post->id), 'large')[0]?> )"></div>
         
@@ -65,17 +86,26 @@ global $post;
       <span class="listed_post-excerpt"><?php echo get_the_excerpt($post->ID) ?></span>
       <span class="listed_post-badge">
         
-        <?php get_badge($post->ID, 'badge-small'); ?>
+        <?php vnv_badge($post->ID, 'badge-small'); ?>
         
       </span>    
     </a>
-  
-    <?php
-    //End Recent Posts Loop 
-      endwhile;
-      wp_reset_postdata();
-    endif;
-    ?>
 
+    <?php
+    endwhile;
+    wp_reset_postdata();
+    ?>
+    
   </div>
+  
+  <?php
+  //End Recent Posts Loop
+  endif;
+  ?>    
+    
+    
+  <div class="recent_posts-show_all">
+      <a class="show_all-link" href="<?php echo get_permalink( get_option( 'page_for_posts' ) ) ?>">All Recent Posts</a>
+    </div>
+
 </div>

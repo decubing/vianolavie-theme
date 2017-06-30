@@ -31,7 +31,8 @@ if ( !empty($posts) || !empty($categories_query) ):
     //Set variables depending on the type of content
     $post_image    = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'medium')[0];
     
-    $scale_featured_image  = get_field('scale_featured_image', $post->ID);
+    if(get_field('scale_featured_image', $post->ID))
+      $scale_featured_image  = get_field('scale_featured_image', $post->ID);
 
   ?>
 

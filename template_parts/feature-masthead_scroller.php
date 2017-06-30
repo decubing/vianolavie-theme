@@ -49,7 +49,7 @@ if ( !empty($posts) || !empty($categories_query) ):
         echo  '<div class="listed_post-unscaled_image" style="background-image:url(' . $post_image . '"></div>';
       ?>
   
-      <div class="listed_post-image <?php if( $scale_featured_image ) echo 'effect-blur';?>" style="background-image:url( <?php echo $post_image; ?> )"></div>
+      <div class="listed_post-image <?php if( !empty($scale_featured_image) ) echo 'effect-blur';?>" style="background-image:url( <?php echo $post_image; ?> )"></div>
       
       <?php 
       //Play Button

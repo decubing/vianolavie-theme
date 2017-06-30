@@ -31,8 +31,7 @@ if ( !empty($posts) || !empty($categories_query) ):
     //Set variables depending on the type of content
     $post_image    = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'medium')[0];
     
-    if(!empty($scale_featured_image))
-      $scale_featured_image  = get_field('scale_featured_image', $post->ID);
+    $scale_featured_image  = get_field('scale_featured_image', $post->ID);
 
   ?>
 
@@ -49,7 +48,7 @@ if ( !empty($posts) || !empty($categories_query) ):
         echo  '<div class="listed_post-unscaled_image" style="background-image:url(' . $post_image . '"></div>';
       ?>
   
-      <div class="listed_post-image <?php if( !empty($scale_featured_image) ) echo 'effect-blur';?>" style="background-image:url( <?php echo $post_image; ?> )"></div>
+      <div class="listed_post-image <?php if( $scale_featured_image ) echo 'effect-blur';?>" style="background-image:url( <?php echo $post_image; ?> )"></div>
       
       <?php 
       //Play Button

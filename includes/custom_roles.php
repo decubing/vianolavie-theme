@@ -24,7 +24,6 @@ function add_vnv_custom_roles(){
         'manage_categories' => true,
         'manage_links' => true,
         'moderate_comments' => true,
-        'publish_posts' => true,
         'read' => true,
         'read_private_posts' => true,
         'unfiltered_html' => true,

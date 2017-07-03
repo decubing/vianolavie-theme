@@ -13,9 +13,8 @@ The following plugins are required to get the most out of the theme:
 - [Advanced Custom Fields], version 5+
 - [Co-Authors Plus], version 3.2.1+
 
-
 ## Issue Reporting and Questions
-Issues and questions can be reported under this repo's ["Issues" tab]. Labels should be added to each issue and issues can be assigned to particular developers. [@bbertucc] is the primary developer of the ViaNolaVie project.
+Issues and questions can be reported under this repo's ["Issues" tab]. Labels should be added to each issue and issues can be assigned to particular developers. [@bbertucc] is the primary developer of the ViaNolaVie project. Checkout the [repo wiki] for helpful guides.
 
 ## Development Roadmap
 The `vianolavie` WordPress theme is actively updated to incorporate stable technology, architecture, and best practices. The [_s] and [Sage] themes were huge inspirations for the ViaNolaVie theme; we love to follow [DRY] principles and keep features and elements modular. In the near future, we plan to incorpate core site functions, such as `register_post_type`, into a dependent plugin.
@@ -31,6 +30,7 @@ ViaNolaVie is open for any contributions. You can report issues under the ["Issu
 - Taylor Osbey ([@tosbey1]), Apprentice Developer
 - You? Start contributing and we'll add your name here.
 
+[repo wiki]:https://github.com/decubing/vianolavie-theme/wiki
 [Advanced Custom Fields]:https://www.advancedcustomfields.com/
 [Co-Authors Plus]:https://wordpress.org/plugins/co-authors-plus/
 [vianolavie.com]:http://vianolavie.com

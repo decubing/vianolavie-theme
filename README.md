@@ -1,4 +1,4 @@
-# ViaNolaVie Open Repo
+# ViaNolaVie WordPress Theme
 
 This public repo contains the WordPress theme for [vianolavie.com].
 

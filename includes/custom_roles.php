@@ -27,7 +27,8 @@ function add_vnv_custom_roles(){
         'read' => true,
         'read_private_posts' => true,
         'unfiltered_html' => true,
-        'upload_files' => true
+        'upload_files' => true,
+        'publish_posts' => false
     ));
     
     //Add Student Role

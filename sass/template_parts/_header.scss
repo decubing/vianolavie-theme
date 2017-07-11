@@ -168,7 +168,7 @@
             margin: 0;
             width: 100%;
             padding: 0 $padding-small $padding-small $padding-small;
-	      }
+	        }
           .site_search-form {
             display: inline-block;
             position: relative;
@@ -176,13 +176,13 @@
             top: 10px;
             right: 0;
             @media only screen and (max-width: $screen-small) {
-	          display: block;
+	            display: block;
               padding-top: $padding-standard;
               top: 0px;
               box-shadow: none !important;
               height: inherit;
               width: 100%;
-	        }
+	          }
             input {
               font-family: $font-family-Roboto;
               height: 100%;
@@ -196,9 +196,10 @@
                 outline: none;
               }
               @media only screen and (max-width: $screen-small) {
-                width: 90%;
+                width: 86%;
                 padding: $padding-small;
                 box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+                border: $border-standard;
                 font-size: $font-size-medium;
               }
             }

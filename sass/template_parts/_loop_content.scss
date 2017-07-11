@@ -260,3 +260,280 @@
     }
   }
 }
+
+//NolaVie Link
+//Loop Content Globals
+.loop_content-listed_medium, .loop_content-listed_large, {
+  font-family: $font-family-PTSerif;
+  background: $color-white;
+  -webkit-box-shadow: $box-shadow-standard;
+  -moz-box-shadow: $box-shadow-standard;
+  box-shadow: $box-shadow-standard;
+  border-radius: $border-radius-standard;
+  overflow: hidden;
+  padding: 0;
+  .listed_large-excerpt, .listed_medium-excerpt {
+    color: $color-base;
+    text-decoration: none;
+    .the_excerpt {
+      top: 26%;
+      padding: $padding-standard;
+    }
+  }
+
+}
+.listed_post-featured_image, .listed_large-featured_image, .listed_medium-featured_image{
+  display: block;
+  position: relative;
+  background-color: $color-secondary;
+  padding-bottom: $padding-image_ratio;
+  width: 100%;
+  overflow: hidden;
+  .featured_image-image, .featured_image-unscaled_image{
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    overflow: hidden;
+    position: absolute;
+  }
+  .featured_image-unscaled_image{
+    z-index: 2;
+    background-size: auto 90%;
+    background-position-y: center;
+  }
+  .featured_image-badge, .featured_image-play_button{
+    position: absolute;
+    z-index: 10;
+    right: $padding-standard;
+  }
+  .featured_image-badge{
+    top: $padding-standard;    
+  }
+  .featured_image-play_button{
+    @extend .button-play;
+  }
+}
+
+//Listed - Medium Loop Content
+.loop_content-listed_medium {
+  margin-bottom: $margin-standard;
+  .button-play {
+    font-size: $font-size-small;
+  }
+  .listed_medium-featured_image{
+    text-decoration: none;
+    .featured_image-title {
+      @extend h3;
+      position: absolute;
+      padding: $padding-standard;
+      color: $color-white;
+      bottom: 0;
+      z-index: 9;
+      color: $color-white;
+      text-shadow: $text-shadow-standard;
+    }   
+    .featured_image-overlay{
+      @extend .image_overlay;
+      z-index: 8;
+    }
+  }
+  .listed_medium-post_footer {
+    display: table;
+    width: 100%;
+    overflow: hidden;
+    padding: 14px $padding-standard;
+    border-top: $border-standard;
+    .post_footer-meta {
+      display: table-cell;
+      vertical-align: middle;
+      @extend .meta_title;
+    }
+  }
+  .listed_medium-excerpt{
+    padding-bottom: $padding-image_ratio;
+    display: block;
+    position: relative; 
+    .excerpt-title{
+      @extend h4; 
+      width: 100%;
+      padding-top: $padding-standard;
+      position: absolute;
+    }
+    .excerpt-badge{
+      position: absolute;
+      right: $padding-standard;
+      top: $padding-standard;
+    }
+  }
+}
+
+//Listing - Large Loop Content
+.loop_content-listed_large {
+  margin: $margin-standard 0;
+  position: relative;
+  .listed_large-post_content {
+    padding: $padding-standard;
+    .post_content-excerpt {
+      @extend .lead;
+      @media only screen and (max-width: $screen-medium) {
+        p {
+          margin-top: 0;
+        }
+      }
+    }
+    .post_content-title {
+      @extend h2;
+      color: $color-primary;
+      text-decoration: none;
+      .title-badge{
+        float: right;
+      }
+    }
+    .post_content-meta {
+      @extend .meta_title;
+      padding: .5em 0;
+    }
+  }
+  .listed_large-post_footer {
+    padding: $padding-standard;
+    background-color: $color-bg-footer;
+    width: 100%;
+    font-size: $font-size-medium;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    .post_footer-author_info, .feature-sharing_options {
+      display: inline-block;
+      @media only screen and (max-width: $screen-smallest) {
+        float: none !important;
+        width: 100% !important;
+        margin: 0;
+      }
+    }
+  }
+}
+
+//Single Post Styles
+.loop_content-single_post {
+  .single_post-post_meta{
+    width: 100%;
+    .post_meta-share_links{
+      text-align: right;
+    }
+    .post_meta-share_links, .post_meta-post_info {
+      @media only screen and (max-width: $screen-small) {
+        display: block;
+        text-align: left;
+      }
+    }
+  }    
+  .single_post-author_info {
+    position: relative;
+    margin-top: $margin-standard;
+    .author_info-badge {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+  .single_post-post_meta {
+    @extend .meta_title;
+    width: 100%;
+    border-bottom: $border-standard;
+    border-top: $border-standard;
+    padding: $padding-standard 0;
+    position: relative;
+    .post_meta-divider {
+      margin: 0 $margin-smaller;
+    }
+  }
+  .single_post-the_content {
+    line-height: $line-height-standard;
+    font-size: $font-size-medium;
+    margin-bottom: $margin-standard;
+    h1, h2, h3, h4 {
+      margin: 1em 0;
+    }
+    iframe {
+      max-width: 100% !important;
+    }
+  }
+  .single_post-sharing_options {
+    border-top: $border-standard;
+    padding: $padding-standard 0;
+  }
+}
+
+//Pagination
+.loop_content-pagination{
+  padding: $padding-standard 0;
+  text-align: center;
+  font-size: $font-size-larger;
+}
+
+//Post Images
+.loop_content-post_media{
+  width: 40%;
+  min-width: 300px;
+  float: right;
+  padding: $padding-standard 0 $padding-standard $padding-standard;
+  font-size: $font-size-small;
+  line-height: 1em;
+  &.full_width{
+    width: 100%;
+    float: none;
+    padding: 0;
+    font-size: $font-size-smaller;
+  }
+  @media only screen and (max-width: $screen-smallest) {
+    width: 100%;
+    min-width: inherit;
+  }
+  .post_media-image_item, .post_media-audio_item, .post_media-embed_code{
+    margin-bottom: $margin-standard;
+    .image_item-meta, .audio_item-meta{
+      padding: $padding-small;
+      background: $color-bg-footer;
+      .meta-credit{
+        color: $color-secondary;
+      }
+      p{
+        margin-top: 0;
+      }
+    }
+  }
+  .post_media-image_item{
+    .image_item-thumb{
+      .thumb-image{
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+  .post_media-audio_item{
+    background:linear-gradient(#a0a0a0 100%, #ebebeb 0%);
+    position: relative;
+    padding-top: 3em;
+    .audio_item-player{
+      display: block;
+      padding: 0 $padding-small;
+      width: 100%;
+      margin-bottom: 3em;
+    }
+  }
+}
+
+//NolaVie Link
+.loop_content-nolavie_notice{
+  padding: $padding-standard;
+  background: $color-light_blue;
+  border-radius: $border-radius-standard;
+  border: $border-standard;
+  margin-top: $margin-standard;
+  text-align: center;
+  font-weight: $font-weight-bold;
+  .nolavie_notice-report_link{
+  }
+}

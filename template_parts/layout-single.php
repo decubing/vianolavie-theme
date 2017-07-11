@@ -20,6 +20,9 @@
         
         <?php 
                 
+        //NolaVie Notice
+        get_template_part('template_parts/loop_content', 'nolavie_notice'); 
+
         //Single Post
         get_template_part('template_parts/loop_content', 'single_post'); 
               

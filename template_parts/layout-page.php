@@ -1,4 +1,4 @@
-<?php if(is_page() && !is_front_page() && have_posts() ):?>
+<?php if(is_page() && !is_front_page() && have_posts() && !is_page('content-archive')):?>
 
 <div class="layout-page">
 

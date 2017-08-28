@@ -17,6 +17,9 @@ if( is_category() || is_tag() ){
 }elseif(is_home()){
   $archive_title       = 'Recent Posts';
   $archive_description = 'A full list of ViaNolaVie\'s most recent posts.';
+}elseif(is_page('content-archive')){
+  $archive_title       = 'Content Archive';
+  $archive_description = 'All the posts featured on ViaNolaVie.';  
 }
   
 ?>

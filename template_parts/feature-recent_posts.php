@@ -27,11 +27,11 @@ global $post;
       'posts_per_page' => $post_per_page,
       'post__not_in' => array($post->ID),
       'meta_query' => array(
-    		array(
+        array(
     			'key'     => 'front_page_placement',
-    			'value'   => array( 'Masthead Scroller', 'Featured Voice' ),
-    			'compare' => 'NOT IN',
-    		),
+    			'value'   => array( 'Archived' ),
+    			'compare' => 'IN',
+    		)
     	),
     ));
   }else{
@@ -105,7 +105,7 @@ global $post;
     
     
   <div class="recent_posts-show_all">
-      <a class="show_all-link" href="<?php echo get_permalink( get_option( 'page_for_posts' ) ) ?>">All Recent Posts</a>
+      <a class="show_all-link" href="<?php echo get_permalink(get_page_by_path('content-archive')) ?>">View Content Archive</a>
     </div>
 
 </div>

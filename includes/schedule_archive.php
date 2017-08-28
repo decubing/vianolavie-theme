@@ -33,7 +33,7 @@ add_action(  'save_post',  'on_vnv_post_update', 10, 2 );
 //When Cron event fires, change post status
 function archive_post($ID){
   $post_id = str_replace(array( '[', ']' ), '', $ID); //Remove array brackets to fire function
-  update_field('front_page_placement', null, $post_id);
+  update_field('front_page_placement', 'Archived', $post_id);
 }
 add_action( 'archive_post_event', 'archive_post', 10, 1  );
 

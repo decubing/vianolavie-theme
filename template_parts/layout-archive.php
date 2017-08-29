@@ -10,12 +10,19 @@ if(is_archive() || is_search() || is_home() || is_page('content-archive')):
   <?php 
   //Content Archive
   if(is_page('content-archive')):
-  
+
+  //Limit the Amount of Posts based on Sticky Amount
+  $sticky_posts = count(get_option('sticky_posts'));
+  $post_per_page = 8;
+  if($sticky_posts > 0){
+    $post_per_page = 8 - $sticky_posts;
+  }
+
   //Content Archive Loop
   $paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
   $the_query = new WP_Query( array(
     'post_type' => 'post',
-    'posts_per_page' => 1,
+    'posts_per_page' => $post_per_page,
     'meta_query' => array(
       array(
   			'key'     => 'front_page_placement',

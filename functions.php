@@ -36,7 +36,10 @@ include_once('includes/vnv_author_info.php' );
 //Schedule Archive Status
 include_once('includes/schedule_archive.php' );
 
-//Add and define Cusotm Roles
+//Add and define Custom Roles
 include_once('includes/custom_roles.php');
+
+//Add and define Custom Taxonomies
+include_once('includes/custom_taxonomies.php');
 
 ?>

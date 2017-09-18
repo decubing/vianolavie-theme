@@ -1,22 +1,24 @@
 .badge{
   display: inline-block;
+  font-family: $font-family-Roboto;
+  font-weight: $font-weight-bold;
+  font-size: 1em;
   background-size: 100% 100%;
   background-position: center center;
   background-repeat: no-repeat;
-  width: 90px;
-  height: 36px;
+  width: 91px;
+  height: 37px;
+  padding: 3px;
   z-index: 1;
-  &.badge-vianola{
-    background-image: url('images/badge-vianola.svg');
-  }
-  &.badge-new_orleans_historical{
-    background-image: url('images/badge-new_orleans_historical.png');
-  }
-  &.badge-nolavie{
-    background-image: url('images/badge-nolavie.svg');
-  }
+  color: $color-white;
+  text-shadow: 1px 1px 4px black;
   &.badge-small{
-    width: 50px;
-    height: 20px;
+    width: 51px;
+    height: 21px;
+    font-size: .8em;
+  }
+  &.bage-image{
+    width: 100%;
+    height: auto;
   }
 }

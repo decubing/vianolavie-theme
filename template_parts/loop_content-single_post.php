@@ -5,7 +5,7 @@
     
     <div class="author_info-badge">
       
-      <?php if(vnv_badge($post->id)) echo vnv_badge($post->id);?>
+      <?php vnv_badge(get_the_ID());?>
       
     </div>
   </div>

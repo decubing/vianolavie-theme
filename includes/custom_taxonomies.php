@@ -1,5 +1,5 @@
 <?php
-// register new taxonomy which applies to attachments
+// Register new taxonomies
 function vnv_add_location_taxonomy() {
   
   //Attachment Taxonomy
@@ -40,13 +40,18 @@ function vnv_add_location_taxonomy() {
 	$badge_args = array(
 		'labels' => $badge_labels,
 		'hierarchical' => true,
-		'query_var' => 'true',
-		'rewrite' => 'true',
-		'show_admin_column' => 'true',
+		'show_ui' => true,
+		'show_admin_column' => true,
+		'query_var' => true,
+		'rewrite' => true,
 	);
 	register_taxonomy( 'badge', 'post', $badge_args );
 	
 	
 }
 add_action( 'init', 'vnv_add_location_taxonomy' );
+
+
+//Show Badge Taxonomy in Select
+
 ?>

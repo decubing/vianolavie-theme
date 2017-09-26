@@ -53,8 +53,9 @@ function add_vnv_custom_roles(){
 function register_vnv_ready_for_editor_status(){
 	register_post_status( 'ready_for_editor', array(
 		'label'                     => 'Ready for Editor',
-		'public'                    => false,
+		'protected'                 => true,
 		'show_in_admin_status_list' => true,
+		'show_in_admin_all_list'    => true,
 		'label_count'               => _n_noop( 'Ready for Editor <span class="count">(%s)</span>', 'Ready for Editor <span class="count">(%s)</span>' ),
 	) );
 }

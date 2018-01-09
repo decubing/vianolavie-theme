@@ -1,8 +1,7 @@
 jQuery(document).ready(function($) {
   
-  
   //Intialize Fancybox
-  $(".fancybox").fancybox();
+  $('.fancybox').fancybox();
   
   //jSticky Items 
   var isNotAndroid = navigator.userAgent.toLowerCase().indexOf("android") === -1; //&& ua.indexOf("mobile");

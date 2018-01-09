@@ -1,7 +1,6 @@
 <?php
 //Add Attribution to Image Captions
-add_filter('get_image_tag', 'image_with_attribution', 10, 4);
-
+add_filter('get_image_tag', 'image_with_attribution', 10, 5);
 function image_with_attribution( $html, $id, $alt, $title, $size = 'medium' ) {
   
   //Default Variables
@@ -24,8 +23,8 @@ function image_with_attribution( $html, $id, $alt, $title, $size = 'medium' ) {
 }
 
 //TEMPORARY FIX: Add CSS to remove TinyMCE Image Edit Field and add ACF styling
-add_action('admin_head', 'my_custom_fonts');
-function my_custom_fonts() {
+add_action('admin_head', 'remove_tiny_mece_field');
+function remove_tiny_mece_field() {
   echo '<style>
     #mceu_39 { 
       display: none !important; 

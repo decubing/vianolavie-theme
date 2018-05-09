@@ -8,6 +8,7 @@ if( get_field('media_type', $post->id)):
     <?php if( get_field('media_type' , $post->id) == 'YouTube Video' ): //Begin YouTube Video  ?>
   
     <iframe class="media_masthead-media_content" src="https://www.youtube.com/embed/<?php the_field('youtube_video_id', $post->id);?>" frameborder="0" allowfullscreen></iframe>
+    <meta property="og:video" content="https://www.youtube.com/watch?v=<?php the_field('youtube_video_id', $post->id);?>" />    
   
     <?php endif; //End YouTube Video  ?>
   

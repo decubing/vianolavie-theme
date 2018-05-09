@@ -42,4 +42,7 @@ include_once('includes/custom_roles.php');
 //Add and define Custom Taxonomies
 include_once('includes/custom_taxonomies.php');
 
+//Add Open Graph Meta
+include_once('includes/vnv_og_meta.php');
+
 ?>

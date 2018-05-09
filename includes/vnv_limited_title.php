@@ -7,11 +7,11 @@
 function vnv_limited_title($post_id){
   
   //Set title and length
-  $title = get_the_title($post_id);
+  $title = html_entity_decode(get_the_title($post_id), ENT_QUOTES, 'UTF-8');
   $length = 35;
   
   if(strlen($title) > $length ){
-    $title = substr(get_the_title($post_id), 0, $length).' ...';
+    $title = substr($title, 0, $length).' ...';
   }
   
   return $title;

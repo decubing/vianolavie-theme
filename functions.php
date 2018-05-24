@@ -45,4 +45,7 @@ include_once('includes/custom_taxonomies.php');
 //Add Open Graph Meta
 include_once('includes/vnv_og_meta.php');
 
+//Add Category Tooltips
+include_once('includes/vnv_category_tooltips.php');
+
 ?>

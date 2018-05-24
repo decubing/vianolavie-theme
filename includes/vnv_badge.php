@@ -63,22 +63,25 @@ function vnv_badge($post_id, $class = null){
 
 }
 
-//Make Taxonomy Mandatory
+//Make Badges Mandatory
 add_action('admin_footer', function() {
 ?>
 <script type="text/javascript">
-    jQuery(document).ready(function ($) {
-        //taxonomy
-        var $scope = $('#badgediv');
-        $('#publish').click(function(){
-            if ($scope.find('input:checked').length > 0) {
-                return true;
-            } else {
-                alert('No badges added. You must add one badge before publishing.');
-                return false;
-            }
-        });
-    });
+  jQuery(document).ready(function ($) {
+    
+    //Require Badges
+    if($('#badgediv').length){
+      $('#publish').click(function(){
+        if ($('#badgediv').find('input:checked').length > 0) {
+          return true;
+        } else {
+          alert('No badges added. You must add one badge before publishing.');
+          return false;
+        }
+      });
+    }
+    
+  });
 </script>
 <?php
 });

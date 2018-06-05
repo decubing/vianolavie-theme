@@ -1,4 +1,12 @@
-<?php if(is_single() && have_posts()):?>
+<?php 
+//Start Single Page Layout  
+if(is_single() && have_posts()):
+?>
+
+  <?php
+  //Add Suggested Content
+  add_suggested_content();
+  ?>
 
 <div class="layout-single">
 
@@ -50,4 +58,7 @@
 </div> 
 
 
-<?php endif;?>
+<?php 
+//End Single Page
+endif;
+?>

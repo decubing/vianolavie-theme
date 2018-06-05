@@ -5,27 +5,27 @@
   <div class="suggested_content-loop_content">
     
   <?php 
-  //Suggested Content Loop
-  $the_query = new WP_Query( array( 
-    'post__not_in'  => get_field('not_suggested_content'),
-    'post_type'     => 'post',
-    'posts_per_page'=> 6,
-    'offset'        => 3,
-    'ignore_sticky_posts' => 1,
-    'meta_query' => array(
-  		array(
-  			'key'     => 'front_page_placement',
-  			'value'   => array( 'Masthead Scroller', 'Featured Voice' ),
-  			'compare' => 'NOT IN',
-  		),
-  	),
-
-  ));
-  if ( $the_query->have_posts() ){
-    while ( $the_query->have_posts() ){ 
-      $the_query->the_post();
+  //Suggested Content Loop - should get at most three posts
+  $content_counter = 0;
+  $suggested_content = get_suggested_content();
+  if ( !is_null($suggested_content) && $suggested_content->have_posts() ){
+    while ( $suggested_content->have_posts() ){ 
+      $suggested_content->the_post();
       get_template_part('template_parts/loop_content', 'listed_medium');
-      wp_reset_postdata(); 
+      wp_reset_postdata();
+      $content_counter++;
+      if ($content_counter >= 3) return;
+    }
+  }
+  // Fallback Content Loop - fills in the gaps if there isn't any/enough suggested content
+  $fallback_content = new WP_Query( array( 'post_type' => 'post', 'ignore_sticky_posts' => true ) );
+  if ( $fallback_content->have_posts() ){
+    while ( $fallback_content->have_posts() ){
+      $fallback_content->the_post();
+      get_template_part('template_parts/loop_content', 'listed_medium');
+      wp_reset_postdata();
+      $content_counter++;
+      if ($content_counter >= 3) return;
     }
   }
   ?>

@@ -7,6 +7,7 @@ jQuery(document).ready($ => {
       post: data.post
     }, res => {
       // No response necessary
+      console.log(res)
     })
-  }, 6000, wpdata)
+  }, 600, wpdata) //TEST
 })

@@ -23,9 +23,9 @@ function intialize_suggested_content(){
       FROM {$table_prefix}vnv_visitor_posts as vnv
       JOIN {$table_prefix}term_relationships as tr
         ON tr.object_id = vnv.post_id
-        JOIN {$table_prefix}term_taxonomy as tt
-          ON tt.taxonomy = 'post_tag'
-          AND tt.term_taxonomy_id = tr.term_taxonomy_id"
+      JOIN {$table_prefix}term_taxonomy as tt
+        ON tt.taxonomy = 'post_tag'
+        AND tt.term_taxonomy_id = tr.term_taxonomy_id"
   );
 }
 add_action('init', 'intialize_suggested_content');
@@ -40,8 +40,6 @@ function add_suggested_content_cb($data){
   check_ajax_referer( "NOLA 4 LIFE", 'nonce' );
   $visitor_ip = sanitize_text_field( $_POST['ip'] );
   $post_id = sanitize_text_field( $_POST['post'] );
-
-  echo "AJAX REQUEST RECEIVED for\n SITE {$table_prefix} \n USER {$visitor_ip} \n POST {$post_id}\n";
   
   // Check if this visitor (using their IP as a proxy) has visited this post before
   $visitor_rows = $wpdb->get_results(
@@ -63,8 +61,6 @@ function add_suggested_content_cb($data){
         '%d'
       )
     );
-    echo "Insert result: ";
-    echo $res ? 'true' : 'false';
   }
   // Stop execution
   wp_die();

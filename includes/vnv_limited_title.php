@@ -7,7 +7,7 @@
 function vnv_limited_title($post_id){
   
   //Set title and length
-  $title = html_entity_decode(get_the_title($post_id), ENT_QUOTES, 'UTF-8');
+  $title = wp_specialchars_decode(get_the_title($post_id));
   $length = 35;
   
   if(strlen($title) > $length ){

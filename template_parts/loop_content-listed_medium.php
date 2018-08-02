@@ -6,7 +6,7 @@ $scale_featured_image = get_field('scale_featured_image');
 
 <div class="loop_content-listed_medium">
   
-  <?php if(has_post_thumbnail() || get_field('media_type', $post->ID)): ?>
+  <?php if(has_post_thumbnail() || get_field('media_type', get_the_ID())): ?>
   
   <a class="listed_medium-featured_image " href="<?php the_permalink(); ?>"> 
     
@@ -35,7 +35,7 @@ $scale_featured_image = get_field('scale_featured_image');
       <?php the_title();?>
     </div>
     <div class="excerpt-badge">
-      <?php vnv_badge($post->ID, 'badge-small'); ?>
+      <?php vnv_badge(get_the_ID(), 'badge-small'); ?>
     </div>
   </a>
 

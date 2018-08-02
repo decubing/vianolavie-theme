@@ -19,7 +19,7 @@
   }
   // Fallback Content Loop - fills in the gaps if there isn't any/enough suggested content
   $fallback_content = new WP_Query( array( 'post_type' => 'post', 'ignore_sticky_posts' => true ) );
-  if ( $fallback_content->have_posts() ){
+  if ( !is_null($fallback_content) && $fallback_content->have_posts() ){
     while ( $fallback_content->have_posts() ){
       $fallback_content->the_post();
       get_template_part('template_parts/loop_content', 'listed_medium');

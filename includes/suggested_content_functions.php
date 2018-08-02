@@ -1,8 +1,7 @@
 <?php
 
 // On initialization, create '*vnv_visitor_posts' and '*vnv_visitor_tags' tables
-// TODO Use prefixes for db names
-// TODO Once this has been run once, doesn't need to be run on init anymore
+// NOTE Once this has been run once, doesn't need to be run on init anymore
 function intialize_suggested_content(){
   global $wpdb;
   global $table_prefix;
@@ -12,7 +11,7 @@ function intialize_suggested_content(){
     "CREATE TABLE IF NOT EXISTS {$table_prefix}vnv_visitor_posts(
       IP VARCHAR(40) NOT NULL, 
       post_id BIGINT UNSIGNED NOT NULL,
-      FOREIGN KEY (post_id) REFERENCES wp_posts(ID),
+      FOREIGN KEY (post_id) REFERENCES {$table_prefix}posts(ID),
       CONSTRAINT PK_Pageview PRIMARY KEY (IP, post_id)
     )"
   );
@@ -22,11 +21,11 @@ function intialize_suggested_content(){
     "CREATE OR REPLACE VIEW {$table_prefix}vnv_visitor_tags AS
       SELECT vnv.IP, vnv.post_id, tt.term_taxonomy_id AS tag_id
       FROM {$table_prefix}vnv_visitor_posts as vnv
-      JOIN wp_term_relationships as tr
+      JOIN {$table_prefix}term_relationships as tr
         ON tr.object_id = vnv.post_id
-        JOIN wp_term_taxonomy as tt
-          ON tt.taxonomy = 'post_tag'
-          AND tt.term_taxonomy_id = tr.term_taxonomy_id"
+      JOIN {$table_prefix}term_taxonomy as tt
+        ON tt.taxonomy = 'post_tag'
+        AND tt.term_taxonomy_id = tr.term_taxonomy_id"
   );
 }
 add_action('init', 'intialize_suggested_content');
@@ -50,8 +49,8 @@ function add_suggested_content_cb($data){
   );
 
   // Insert a new entry for the IP/post if none was found
-  if($visitor_rows == null){
-    $wpdb->insert(
+  if(empty($visitor_rows)){
+    $res = $wpdb->insert(
       "{$table_prefix}vnv_visitor_posts",
       array(
         'IP' => $visitor_ip,
@@ -118,9 +117,9 @@ function get_suggested_content(){
       GROUP BY tag_id
       ORDER BY tag_count DESC
       LIMIT {$NO_OF_TOP_TAGS}) AS tc
-    INNER JOIN wp_term_relationships AS rels
+    INNER JOIN {$table_prefix}term_relationships AS rels
       ON rels.term_taxonomy_id = tc.tag_id
-    INNER JOIN wp_posts AS p
+    INNER JOIN {$table_prefix}posts AS p
       ON p.ID = rels.object_ID
       AND p.post_status = 'publish'
     LEFT JOIN {$table_prefix}vnv_visitor_posts as vp

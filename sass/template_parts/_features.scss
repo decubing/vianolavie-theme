@@ -242,15 +242,15 @@
   }
 }
 
-//Suggested Content
-.feature-suggested_content {
+//Suggested Content (also related content)
+.feature-suggested_content, .feature-related_content {
   width: 100%;
   padding: $padding-standard 0;
-  .suggested_content-title{
+  .suggested_content-title, .related_content-title{
     @extend .section_title;
     margin: 0 1%;
   }
-  .suggested_content-loop_content { 
+  .suggested_content-loop_content, .related_content-loop_content { 
     @extend .table;   
     width: 100%;
     .loop_content-listed_medium{

@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * This file contains functions related to the "Suggested Content" feature.
+ * It has also been appropriated for "Related Content" functions, as
+ * related content is related to suggested content.
+ */
+
 // On initialization, create '*vnv_visitor_posts' and '*vnv_visitor_terms' tables
 // NOTE Once this has been run once, doesn't need to be run on init anymore
 function intialize_suggested_content(){
@@ -41,8 +47,216 @@ function intialize_suggested_content(){
         ON t.term_id = tt.term_id"
   );
 
+  // Creates a blacklist table to filter results against
+  // Actual filtering happens when getting suggested content,
+  // so blacklisted tags are still added to the database
+  $wpdb->query(
+    "CREATE TABLE IF NOT EXISTS {$table_prefix}vnv_tag_blacklist(
+      `tag_name` VARCHAR(40) NOT NULL UNIQUE
+    )"
+  );
+
 }
 add_action('init', 'intialize_suggested_content');
+
+
+// Creates a blacklist table to filter results against
+// Actual filtering happens when getting suggested content,
+// so blacklisted tags are still added to the database
+function populate_suggestion_blacklist(){
+  global $wpdb;
+  global $table_prefix;
+
+  // Only run if the blacklist table is empty
+  $count = $wpdb->get_var("SELECT COUNT(*) FROM {$table_prefix}vnv_tag_blacklist");
+  if($count == 0){
+    // Populate
+    $wpdb->query("INSERT INTO {$table_prefix}vnv_tag_blacklist
+      VALUES
+      ('nolavie-archive'),
+      ('local-new-orleans'),
+      ('Music'),
+      ('Art'),
+      ('food'),
+      ('viewpoints'),
+      ('partner-content'),
+      ('lifestyle'),
+      ('Events'),
+      ('new-orleans'),
+      ('silvethreads'),
+      ('kelley-crawford'),
+      ('entertainment'),
+      ('cuisine'),
+      ('film'),
+      ('nolavie'),
+      ('video'),
+      ('literature'),
+      ('artists-in-their-own-words'),
+      ('Mardi Gras'),
+      ('UNO documentary'),
+      ('Laszlo Fulop'),
+      ('Audio'),
+      ('seniors'),
+      ('Theater'),
+      ('fashion'),
+      ('Education'),
+      ('Jazz Fest'),
+      ('Entrepreneurs'),
+      ('dinin'),
+      ('hurricane katrina'),
+      ('NolaBeings'),
+      ('Opinion'),
+      ('Books'),
+      ('Culture'),
+      ('Restaurants'),
+      ('press Street: Room 22'),
+      ('Folwell Dunbar'),
+      ('Arts'),
+      ('Jazz'),
+      ('poetry'),
+      ('Festivals'),
+      ('Bring your own'),
+      ('WWNO'),
+      ('history'),
+      ('Dance'),
+      ('we got your weekend'),
+      ('community'),
+      ('Culture Watch'),
+      ('text'),
+      ('entrepreneur'),
+      ('Comedy'),
+      ('french quarter'),
+      ('Health'),
+      ('How’s Bayou?'),
+      ('Cassie Pruyn'),
+      ('Sports'),
+      ('Renee Peck'),
+      ('Bayou St. John'),
+      ('Mary Rickard'),
+      ('Guest Blogs'),
+      ('Voices'),
+      ('Katrina'),
+      ('Carnival'),
+      ('business'),
+      ('live music nola'),
+      ('Big Easy Living'),
+      ('Dating'),
+      ('Artists'),
+      ('uno film'),
+      ('Steven Hatley'),
+      ('summer'),
+      ('photos'),
+      ('tourism'),
+      ('virtual gallery'),
+      ('Treme'),
+      ('et cetera'),
+      ('creative writing'),
+      ('Love NOLA'),
+      ('drinks'),
+      ('Instagram'),
+      ('travel'),
+      ('Bettye Anding'),
+      ('Brian Friedman'),
+      ('My House NOLA'),
+      ('Bywater'),
+      ('Hollywood South'),
+      ('Lower Ninth Ward'),
+      ('movies'),
+      ('New Orleans Saints'),
+      ('halloween'),
+      ('Environment'),
+      ('food porn'),
+      ('New Orleans local'),
+      ('Christmas'),
+      ('home'),
+      ('Storytelling'),
+      ('tulane university'),
+      ('cocktails'),
+      ('week in review'),
+      ('Technology'),
+      ('Vicki Mayer'),
+      ('the times-picayune'),
+      ('new orleans food'),
+      ('David Benedetto'),
+      ('neighborhoods'),
+      ('Fitness'),
+      ('New Orleans Entrepreneur Week'),
+      ('parades'),
+      ('Louisiana'),
+      ('Interview'),
+      ('Tipitinas'),
+      ('Instajournal'),
+      ('Shane Colman'),
+      ('Concerts'),
+      ('Cycling'),
+      ('changeworks'),
+      ('Claire Bangser'),
+      ('Room 220'),
+      ('Recipes'),
+      ('Cooking'),
+      ('NOMA'),
+      ('food porn friday'),
+      ('neighborhood'),
+      ('commentary'),
+      ('university of new orleans'),
+      ('Wesley Hodges'),
+      ('holiday'),
+      ('Tulane'),
+      ('Football'),
+      ('Nora Daniels'),
+      ('NFL'),
+      ('Saints'),
+      ('Mardi Gras Indians'),
+      ('holidays'),
+      ('twenty-somethings'),
+      ('New Orleans Museum of Art'),
+      ('Thanksgiving'),
+      ('submissions'),
+      ('Recipe'),
+      ('Louisiana Philharmonic Orchestra'),
+      ('Jean-Mark Sens'),
+      ('Sarah Holtz'),
+      ('Bars'),
+      ('radio'),
+      ('salad'),
+      ('Reece Burka'),
+      ('women'),
+      ('Artist'),
+      ('design'),
+      ('Concert'),
+      ('media histories'),
+      ('event preview'),
+      ('Artist In Their Own Words'),
+      ('caption'),
+      ('food trucks'),
+      ('Contemporary Arts Center'),
+      ('cinema reset'),
+      ('Madewood Plantation'),
+      ('interviews'),
+      ('humor'),
+      ('Kim Frusciante'),
+      ('Sarah Isabelle Prevot'),
+      ('Marigny'),
+      ('Jackson Square Artists'),
+      ('authors'),
+      ('Nola Art House Music'),
+      ('Propeller'),
+      ('idea village'),
+      ('southern food and beverage museum'),
+      ('performing arts'),
+      ('UNO'),
+      ('city park'),
+      ('family'),
+      ('costumes'),
+      ('weekend'),
+      ('Press Street'),
+      ('Social Entrepreneurs')
+    ");
+  }
+
+}
+// Uncomment this when you want to populate the blacklist, but comment it back out after
+// add_action('init', 'populate_suggestion_blacklist');
 
 
 // Callback for adding suggested content. Executed when Ajax request comes back from page.
@@ -126,10 +340,9 @@ function add_suggested_content(){
 // Called by feature-suggested_content.php
 function get_suggested_content(){
   global $wpdb;
-  $ATTENTION_LEVEL = 1;
-  $USE_CATEGORIES = 1;
+  $ATTENTION_LEVEL = 1; // Use high-attention views only
+  $USE_CATEGORIES = 1; // Use categories in addition to tags
 
-  // default values are most inclusive: low attention threshold and includes categories + tags
   $sql = generate_suggested_content_sql($ATTENTION_LEVEL, $USE_CATEGORIES);
   $post_rows = $wpdb->get_results($sql);
 
@@ -142,6 +355,41 @@ function get_suggested_content(){
   // Query for the returned posts, ignoring stickied posts
   $query = new WP_Query( array( 'post__in' => $post_list, 'ignore_sticky_posts' => true ) );
   return $query;
+}
+
+// Return Related Content for the given post ID
+// Related content is just posts in the same category
+// Called by feature-related_content.php
+function get_related_content($post_id, $limit = 3){
+
+  // Get posts in the same category as the given post
+  // Thanks Felix: https://wordpress.stackexchange.com/a/311965
+  global $wpdb;
+
+  $query  = "SELECT x.object_id as ID
+    FROM (
+    SELECT tr1.object_id, COUNT(tr1.term_taxonomy_id) AS common_tag_count
+    FROM {$wpdb->term_relationships} AS tr1
+    INNER JOIN {$wpdb->term_relationships} AS tr2 ON tr1.term_taxonomy_id = tr2.term_taxonomy_id
+    WHERE tr2.object_id = %d
+    GROUP BY tr1.object_id
+    HAVING tr1.object_id != %d
+    ORDER BY COUNT(tr1.term_taxonomy_id) DESC
+    LIMIT 10
+    ) x
+    INNER JOIN {$wpdb->posts} p ON p.ID = x.object_id
+    ORDER BY common_tag_count DESC, p.post_date DESC
+    LIMIT %d;";
+
+  $sql = $wpdb->prepare($query, $post_id, $post_id, $limit);
+  $ids = $wpdb->get_col($sql);
+
+  // Query for the returned posts, ignoring stickied posts
+  $query = new WP_Query( array( 'post__in' => $ids, 'ignore_sticky_posts' => true ) );
+  return $query;
+  
+  // MAYBE filter out pages the user has already been on
+
 }
 
 // For use in shortcodes
@@ -221,8 +469,6 @@ function query_top_terms_handler($atts, $content = null){
  * $max_results:     int
  * $high_attention:  bool
  * $use_categories:  bool
- * TODO Remove wp-config.php from version control
- * TODO Remove Uncategorized category? Its ID is 1
  */
 function generate_suggested_content_sql($high_attention_only, $use_categories, $no_of_top_terms = 5, $max_results = 3){
   global $table_prefix;
@@ -241,7 +487,11 @@ function generate_suggested_content_sql($high_attention_only, $use_categories, $
     (SELECT 
       term_taxonomy_id, 
       COUNT(term_taxonomy_id) AS term_count
-    FROM {$table_prefix}vnv_visitor_terms ";
+    FROM 
+      (SELECT * FROM {$table_prefix}vnv_visitor_terms as viz 
+      LEFT JOIN {$table_prefix}vnv_tag_blacklist AS bl 
+      ON viz.name = bl.tag_name 
+      WHERE bl.tag_name IS NULL) as vt ";
 
   // Use ID if available, otherwise fallback to IP
   $sql .= ($visitor_user_id) ? 
@@ -265,7 +515,7 @@ function generate_suggested_content_sql($high_attention_only, $use_categories, $
     INNER JOIN {$table_prefix}posts AS p
       ON p.ID = rels.object_ID
       AND p.post_status = 'publish'
-    LEFT JOIN {$table_prefix}vnv_visitor_posts as vp
+    LEFT JOIN {$table_prefix}vnv_visitor_posts AS vp
       ON vp.post_id = rels.object_id
       WHERE vp.post_id IS NULL
     LIMIT {$max_results}";

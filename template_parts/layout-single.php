@@ -28,11 +28,14 @@ if(is_single() && have_posts()):
         
         <?php 
                 
-        //NolaVie Notice
+        // NolaVie Notice
         get_template_part('template_parts/loop_content', 'nolavie_notice'); 
 
-        //Single Post
+        // Single Post
         get_template_part('template_parts/loop_content', 'single_post'); 
+
+        // Related Content
+        // get_template_part('template_parts/feature', 'related_content');
               
         ?>
       
@@ -42,17 +45,15 @@ if(is_single() && have_posts()):
       //End Single Post Loop
       endwhile;
       ?>
+
       
       <div class="content-feature">
-      
-        <?php
-          
-        //Suggested Content
-        get_template_part('template_parts/feature', 'recent_posts');
-        
-        ?>
-      
+        <?php get_template_part('template_parts/feature', 'recent_posts'); ?>
       </div>
+    </div>
+    
+    <div class="container-feature">
+      <?php get_template_part('template_parts/feature', 'related_content'); ?>
     </div>
   </div>
 </div> 

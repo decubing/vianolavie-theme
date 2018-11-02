@@ -176,8 +176,11 @@
       }
       .content-feature{
         width: 35%;
-      }      
-    } 
+      }
+    }
+    .container-feature{
+      @extend .container;
+    }
   }
 }
 

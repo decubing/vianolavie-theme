@@ -248,7 +248,7 @@
   padding: $padding-standard 0;
   .suggested_content-title, .related_content-title{
     @extend .section_title;
-    margin: 0 1%;
+    margin: 0;
   }
   .suggested_content-loop_content, .related_content-loop_content { 
     @extend .table;   
@@ -262,6 +262,12 @@
       }
       @media only screen and (max-width: $screen-smallest) {
         width: 98%
+      }
+      &:last-of-type{
+        margin-right: 0;
+      }
+      &:first-of-type{
+        margin-left: 0;
       }
     }
   }

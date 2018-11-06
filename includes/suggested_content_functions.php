@@ -7,10 +7,12 @@
  */
 
 // On initialization, create '*vnv_visitor_posts' and '*vnv_visitor_terms' tables
-// NOTE Once this has been run once, doesn't need to be run on init anymore
 function intialize_suggested_content(){
   global $wpdb;
   global $table_prefix;
+
+  // Don't run if it's been run before for the current version
+  if ( get_option( "vnv_suggested_content_version" ) == 1 ) return;
 
   //Creates a table to store all posts visited by specific IP addresses
   $wpdb->query(
@@ -56,8 +58,13 @@ function intialize_suggested_content(){
     )"
   );
 
+  // Populates the blacklist, if empty
+  populate_suggestion_blacklist();
+
+  update_option( "vnv_suggested_content_version", 1 );
+
 }
-add_action('init', 'intialize_suggested_content');
+add_action('admin_init', 'intialize_suggested_content');
 
 
 // Creates a blacklist table to filter results against
@@ -255,9 +262,6 @@ function populate_suggestion_blacklist(){
   }
 
 }
-// Uncomment this when you want to populate the blacklist, but comment it back out after
-// add_action('init', 'populate_suggestion_blacklist');
-
 
 // Callback for adding suggested content. Executed when Ajax request comes back from page.
 function add_suggested_content_cb($data){
@@ -480,7 +484,7 @@ function generate_suggested_content_sql($high_attention_only, $use_categories, $
     $taxonomies = "\"post_tag\", \"category\"" :
     $taxonomies = "\"post_tag\"";
 
-  // First bit of the querying SQL
+  // First bit of the querying SQL; filter out blacklist
   $sql = 
     "SELECT p.ID, p.post_title
     FROM

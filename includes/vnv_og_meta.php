@@ -19,7 +19,7 @@ function insert_fb_in_head() {
     echo '<meta property="og:video" content="https://www.youtube.com/watch?v='.get_field('youtube_video_id', $post->id).'"/>';
   }elseif(is_single()){
     echo '<meta property="og:type" content="article"/>';
-  }elseif(is_archive())
+  }
   
   //Thumbnail
   if(!has_post_thumbnail( $post->ID )) { //the post does not have featured image, use a default image

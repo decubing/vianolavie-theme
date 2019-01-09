@@ -151,7 +151,6 @@
 //Single Layout
 .layout-single{
   background: $color-white;
-  padding-bottom: $padding-standard;
   .single-container {
     @extend .container;   
     @media only screen and (max-width: $screen-large) {

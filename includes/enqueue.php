@@ -21,5 +21,14 @@ function vnv_scripts_and_styles() {
 	wp_enqueue_script( 'fancybox', get_template_directory_uri().'/scripts/fancybox/jquery.fancybox.pack.js?v=2.1.5', array('jquery'), NULL, true );
 	
 }
+
+/**
+ * Script to fix an edit flow bug that prevents authors from being modified.
+ */
+function edit_flow_fix() {
+	wp_enqueue_script( 'edit_flow_fix', get_template_directory_uri().'/scripts/editFlowKludge.js', array(), NULL, true );	
+}
+
 add_action( 'wp_enqueue_scripts', 'vnv_scripts_and_styles' );
+add_action( 'admin_enqueue_scripts', 'edit_flow_fix' );
 ?>

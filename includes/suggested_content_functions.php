@@ -346,9 +346,16 @@ function get_suggested_content(){
   global $wpdb;
   $ATTENTION_LEVEL = 1; // Use high-attention views only
   $USE_CATEGORIES = 1; // Use categories in addition to tags
+  $MIN_REQUIRED_POSTVIEWS = 10;
+
+  // Return null if user hasn't seen enough content; not worth suggesting content with such paltry data
+  if (get_user_visited_post_count($ATTENTION_LEVEL) < $MIN_REQUIRED_POSTVIEWS) {
+    return null;
+  }
 
   $sql = generate_suggested_content_sql($ATTENTION_LEVEL, $USE_CATEGORIES);
   $post_rows = $wpdb->get_results($sql);
+
 
   // Get post IDs as an array
   $post_list = array();
@@ -525,6 +532,34 @@ function generate_suggested_content_sql($high_attention_only, $use_categories, $
     LIMIT {$max_results}";
 
   return $sql;
+}
+
+/**
+ * Used to check whether or not we should actually get suggested content.
+ * Meager amounts of user data (i.e., a low number of posts visited) are
+ * not a worthy basis for suggesting content.
+ */
+function get_user_visited_post_count($high_attention_only) {
+  global $table_prefix;
+  global $wpdb;
+  $visitor_ip = get_ip_address();
+  $visitor_user_id = get_current_user_id(); // returns 0 if not logged in
+
+  // Start us off
+  $sql = "SELECT COUNT(1) FROM {$table_prefix}vnv_visitor_posts ";
+
+  // Use ID if available, otherwise fallback to IP
+  $sql .= ($visitor_user_id) ? 
+    "WHERE `user_id` = \"{$visitor_user_id}\" " : 
+    "WHERE IP = \"{$visitor_ip}\" ";
+
+  // Use high-attention views only?
+  // (if not, use only low attention, unless we want to double-weight high attention views?)
+  $sql .= ($high_attention_only) ? 
+    "AND high_attention = 1;" : 
+    "AND high_attention = 0;";
+
+  return $wpdb->get_var($sql);
 }
 
 /**

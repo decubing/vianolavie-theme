@@ -6,13 +6,14 @@
  * related content is related to suggested content.
  */
 
-// On initialization, create '*vnv_visitor_posts' and '*vnv_visitor_terms' tables
+// On initialization, create necessary tables
 function intialize_suggested_content(){
   global $wpdb;
   global $table_prefix;
+  $VER = 1.1; // Update this value whenever we update tables/schemas
 
   // Don't run if it's been run before for the current version
-  if ( get_option( "vnv_suggested_content_version" ) == 1 ) return;
+  if ( get_option( "vnv_suggested_content_version" ) == $VER ) return;
 
   //Creates a table to store all posts visited by specific IP addresses
   $wpdb->query(
@@ -58,10 +59,22 @@ function intialize_suggested_content(){
     )"
   );
 
+  // Creates an intersection table for storing users' preferred tags, populated
+  // when users sign up and select from a list of tags and used when suggesting content
+  $test = $wpdb->query(
+    "CREATE TABLE IF NOT EXISTS {$table_prefix}vnv_user_preferred_tags(
+      `user_id` BIGINT(20) UNSIGNED,
+      `term_taxonomy_id` BIGINT(20) UNSIGNED,
+      FOREIGN KEY (user_id) REFERENCES {$wpdb->base_prefix}users(ID),
+      FOREIGN KEY (term_taxonomy_id) REFERENCES {$table_prefix}term_taxonomy(term_taxonomy_id),
+      CONSTRAINT uc_userpref UNIQUE (user_id, term_taxonomy_id)
+    )"
+  );
+  
   // Populates the blacklist, if empty
   populate_suggestion_blacklist();
 
-  update_option( "vnv_suggested_content_version", 1 );
+  update_option( "vnv_suggested_content_version", $VER );
 
 }
 add_action('admin_init', 'intialize_suggested_content');
@@ -350,10 +363,16 @@ function get_suggested_content(){
 
   // Return null if user hasn't seen enough content; not worth suggesting content with such paltry data
   if (get_user_visited_post_count($ATTENTION_LEVEL) < $MIN_REQUIRED_POSTVIEWS) {
-    return null;
+    return null; 
   }
 
-  $sql = generate_suggested_content_sql($ATTENTION_LEVEL, $USE_CATEGORIES);
+  // Use seeded tag values if user is logged in
+  if(get_current_user_id()) {
+    $sql = generate_weighted_suggested_content_sql();
+  } else {
+    $sql = generate_suggested_content_sql($ATTENTION_LEVEL, $USE_CATEGORIES);
+  }
+
   $post_rows = $wpdb->get_results($sql);
 
 
@@ -368,9 +387,11 @@ function get_suggested_content(){
   return $query;
 }
 
-// Return Related Content for the given post ID
-// Related content is just posts in the same category
-// Called by feature-related_content.php
+/**
+ * Return Related Content for the given post ID
+ * Related content is just posts in the same category
+ * Called by feature-related_content.php
+ */
 function get_related_content($post_id, $limit = 3){
 
   // Get posts in the same category as the given post
@@ -421,7 +442,22 @@ function query_top_terms_handler($atts, $content = null){
 
   $sql = generate_top_tags_sql($a['high_attention'], $a['use_categories']);
   $tag_rows = $wpdb->get_results($sql);
-  
+
+  return generate_table_from_sql_results($tag_rows);
+}
+
+add_shortcode( 'query_top_sitewide_terms', 'query_top_sitewide_terms_handler' );
+function query_top_sitewide_terms_handler(){
+  $rows = get_most_popular_sitewide_terms(20);
+  return generate_table_from_sql_results($rows);
+}
+
+/**
+ * Takes in SQL results from wpdb (as an object, the default return value) and
+ * spews out a <pre>-formatted plaintext table with the results.
+ * @param rows: return value of $wpdb->get_results($some_sql);
+ */
+function generate_table_from_sql_results($rows){
   // Start generating the string to print out results formatted nicely
   $result_string = "<pre>\n";
   
@@ -429,12 +465,12 @@ function query_top_terms_handler($atts, $content = null){
   $max_lengths = [];
 
   // Checking the column names
-  foreach ($tag_rows[0] as $col_name=>$col_val) {
+  foreach ($rows[0] as $col_name=>$col_val) {
     $max_lengths[$col_name] = strlen($col_name);
   }
 
   // Iterating through to get max lengths
-  foreach ($tag_rows as $row) {
+  foreach ($rows as $row) {
     foreach ($row as $key => $value) {
       $cur_len = strlen($value);
       // Updates maximum length for the column if it's not set or shorter than the current value
@@ -445,7 +481,7 @@ function query_top_terms_handler($atts, $content = null){
   }
 
   // Print column names
-  foreach ($tag_rows[0] as $col_name=>$col_val) {
+  foreach ($rows[0] as $col_name=>$col_val) {
     $result_string .= str_pad($col_name, $max_lengths[$col_name]) . " | ";
   }
   $result_string .= "\n";
@@ -457,7 +493,7 @@ function query_top_terms_handler($atts, $content = null){
   $result_string .= "\n";
 
   // Iterate through again to print the formatted results
-  foreach ($tag_rows as $row) {
+  foreach ($rows as $row) {
     foreach ($row as $key => $value) {
       $result_string .= str_pad($value, $max_lengths[$key]) . " | ";
     }
@@ -535,18 +571,73 @@ function generate_suggested_content_sql($high_attention_only, $use_categories, $
 }
 
 /**
+ * For simplicity, assumes high attention, using categories, and a logged-in user.
+ * Generates the sql to get term_taxonomy_id's for a user weighted by their
+ * specified interests as specified during registration.
+ */
+function generate_weighted_suggested_content_sql($no_of_top_terms = 10, $max_results = 3){
+  global $table_prefix;
+  $visitor_user_id = get_current_user_id();
+  $seed_weight = 3; // Seeded tags count as this many viewed posts
+
+  $sql = "SELECT p.ID, p.post_title FROM
+  (SELECT
+  adj.term_taxonomy_id,
+  SUM(adj.term_count) AS weighted_count
+  FROM
+	((SELECT 
+	  term_taxonomy_id,
+	  COUNT(term_taxonomy_id) AS term_count 
+	  FROM
+	  (SELECT * 
+      FROM wp_2_vnv_visitor_terms as viz 
+      LEFT JOIN wp_2_vnv_tag_blacklist AS bl 
+      ON viz.name = bl.tag_name 
+      WHERE bl.tag_name IS NULL) as vt 
+    WHERE `user_id` = \"{$visitor_user_id}\" 
+    AND high_attention = 1 
+    AND taxonomy IN (\"post_tag\", \"category\") 
+    GROUP BY term_taxonomy_id)
+	
+    UNION ALL
+    
+    (SELECT
+      term_taxonomy_id,
+      $seed_weight
+    FROM wp_2_vnv_user_preferred_tags
+    WHERE `user_id` = \"{$visitor_user_id}\")
+  ) AS adj
+
+  GROUP BY adj.term_taxonomy_id
+  ORDER BY weighted_count DESC
+  LIMIT $no_of_top_terms) AS tc
+  INNER JOIN {$table_prefix}term_relationships AS rels
+    ON rels.term_taxonomy_id = tc.term_taxonomy_id
+  INNER JOIN {$table_prefix}posts AS p
+    ON p.ID = rels.object_ID
+    AND p.post_status = 'publish'
+  LEFT JOIN {$table_prefix}vnv_visitor_posts AS vp
+    ON vp.post_id = rels.object_id
+    WHERE vp.post_id IS NULL
+  GROUP BY p.ID
+  LIMIT {$max_results}";
+
+  return $sql;
+}
+
+/**
  * Used to check whether or not we should actually get suggested content.
  * Meager amounts of user data (i.e., a low number of posts visited) are
- * not a worthy basis for suggesting content.
+ * not a worthy basis for suggesting content. Treats seeded data as weighted postviews.
  */
-function get_user_visited_post_count($high_attention_only) {
+function get_user_visited_post_count($high_attention_only, $seed_weight = 3) {
   global $table_prefix;
   global $wpdb;
   $visitor_ip = get_ip_address();
   $visitor_user_id = get_current_user_id(); // returns 0 if not logged in
 
   // Start us off
-  $sql = "SELECT COUNT(1) FROM {$table_prefix}vnv_visitor_posts ";
+  $sql = "SELECT COUNT(*) FROM {$table_prefix}vnv_visitor_posts ";
 
   // Use ID if available, otherwise fallback to IP
   $sql .= ($visitor_user_id) ? 
@@ -559,13 +650,26 @@ function get_user_visited_post_count($high_attention_only) {
     "AND high_attention = 1;" : 
     "AND high_attention = 0;";
 
-  return $wpdb->get_var($sql);
+
+  $unweighted_count = (int)$wpdb->get_var($sql);
+  $weights = 0;
+
+  // Weights come from seeded tags
+  if($visitor_user_id) {
+    $weights = (int)$wpdb->get_var("SELECT 
+      COUNT(*) 
+      FROM {$table_prefix}vnv_user_preferred_tags 
+      WHERE user_id = $visitor_user_id");
+    $weights *= $seed_weight;
+  }
+
+  return $unweighted_count + $weights;
 }
 
 /**
  * Used by query_top_terms_handler to get the top tags for the current user.
  */
-function generate_top_tags_sql($high_attention_only, $use_categories, $no_of_top_terms = 20){
+function generate_top_tags_sql($high_attention_only, $use_categories, $no_of_top_terms = 20) {
   global $table_prefix;
   $visitor_ip = get_ip_address();
   $visitor_user_id = get_current_user_id(); // returns 0 if not logged in
@@ -578,7 +682,7 @@ function generate_top_tags_sql($high_attention_only, $use_categories, $no_of_top
   // First bit of the querying SQL
   $sql = 
     "SELECT 
-    vt.term_id,
+    vt.term_taxonomy_id AS term_id,
     vt.name,
     vt.taxonomy,
     COUNT(vt.term_taxonomy_id) AS term_count 
@@ -605,15 +709,90 @@ function generate_top_tags_sql($high_attention_only, $use_categories, $no_of_top
   return $sql;
 }
 
+/**
+ * Gets the most popular tags across the site (excluding blacklisted tags). 
+ * Used to present new users with tag choices
+ * for seeding their preferences/suggested content.
+ */
+function get_most_popular_sitewide_terms($no_of_terms) {
+  global $table_prefix;
+  global $wpdb;
+
+  $sql = "SELECT
+    tr.term_taxonomy_id AS term_id,
+    t.name,
+    tt.taxonomy,
+    COUNT(tr.term_taxonomy_id) AS term_count
+  FROM {$table_prefix}term_relationships tr
+  INNER JOIN {$table_prefix}term_taxonomy as tt
+    ON tt.taxonomy IN ('post_tag', 'category')
+    AND tt.term_taxonomy_id = tr.term_taxonomy_id
+  INNER JOIN {$table_prefix}terms as t
+    ON t.term_id = tt.term_id
+  LEFT JOIN {$table_prefix}vnv_tag_blacklist AS bl
+    ON t.name = bl.tag_name
+  WHERE bl.tag_name IS NULL
+  GROUP BY tr.term_taxonomy_id
+  ORDER BY term_count DESC
+  LIMIT {$no_of_terms}";
+
+  return $wpdb->get_results($sql);
+}
+
+/**
+ * Gets term_taxonomy_ids based on their names. If a name corresponds to multiple taxonomies,
+ * e.g. a "music" category AND post_tag, the term_taxonomy_ids for both will be returned.
+ * The basis for our suggested content system is the term_taxonomy_id, so this gets fed in to
+ * the vnv_user_preferred_tags table to seed suggested content.
+ * Names that weren't found are listed in an array under the "not_found" key 
+ * @param names: numeric array of names to search for
+ * @return tag_ids: associate array of tag names, indexed by tag ID.
+ */
+function get_tag_ids_by_names($names) {
+
+}
+
+/**
+ * Seed user's interests with checked boxes from gravity forms.
+ * IDs that don't correspond to any terms are ignored.
+ * Thanks: https://stackoverflow.com/questions/37411232/mysql-insert-new-record-into-table-b-if-foreign-key-exists-in-table-a
+ */
+add_action( 'gform_user_registered', 'seed_user_interests_on_registration', 10, 4 );
+function seed_user_interests_on_registration( $user_id, $feed, $entry ) {
+  global $wpdb;
+  global $table_prefix;
+
+  $terms_field_id = 16;
+  $field = GFAPI::get_field( $entry['form_id'], $terms_field_id );
+  $term_ids = is_object( $field ) ? $field->get_value_export( $entry ) : '';
+  
+  // $term_ids should be a comma-separated list of term IDs; do nothing if none were selected
+  if(!$term_ids) return;
+  
+  $term_id_array = explode(',', $term_ids);
+  $insertion_items = '';
+  foreach ($term_id_array as $term_id) {
+    $insertion_items .= "($user_id,$term_id),";
+  }
+  $insertion_items = substr($insertion_items, 0, -1); // Remove trailing comma
+
+  $wpdb->query(
+    "INSERT INTO {$table_prefix}vnv_user_preferred_tags(user_id,term_taxonomy_id)
+    VALUES $insertion_items"
+  );
+
+  return;
+}
+
 // Modified from https://stackoverflow.com/questions/1634782/what-is-the-most-accurate-way-to-retrieve-a-users-correct-ip-address-in-php/2031935#2031935
 function get_ip_address(){
   foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key){
-      if (array_key_exists($key, $_SERVER) === true){
-          foreach (explode(',', $_SERVER[$key]) as $ip){
-              $ip = trim($ip); // just to be safe
-              return $ip;
-          }
+    if (array_key_exists($key, $_SERVER) === true){
+      foreach (explode(',', $_SERVER[$key]) as $ip){
+        $ip = trim($ip); // just to be safe
+        return $ip;
       }
+    }
   }
 }
 ?>

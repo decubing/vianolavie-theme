@@ -35,6 +35,12 @@
           $(settings.slider).css('left', '');
         });
       }
+
+      // Set position of left control based on width
+      $('a.masthead_scroller-control_prev').css({
+        "left":$(settings.singleSlide).width(),
+        "right":"unset"
+      });
       
       $('a.masthead_scroller-control_prev').click(function (e) {
         e.preventDefault();

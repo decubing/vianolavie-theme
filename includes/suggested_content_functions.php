@@ -590,8 +590,8 @@ function generate_weighted_suggested_content_sql($no_of_top_terms = 10, $max_res
 	  COUNT(term_taxonomy_id) AS term_count 
 	  FROM
 	  (SELECT * 
-      FROM wp_2_vnv_visitor_terms as viz 
-      LEFT JOIN wp_2_vnv_tag_blacklist AS bl 
+      FROM {$table_prefix}vnv_visitor_terms as viz 
+      LEFT JOIN {$table_prefix}vnv_tag_blacklist AS bl 
       ON viz.name = bl.tag_name 
       WHERE bl.tag_name IS NULL) as vt 
     WHERE `user_id` = \"{$visitor_user_id}\" 
@@ -604,7 +604,7 @@ function generate_weighted_suggested_content_sql($no_of_top_terms = 10, $max_res
     (SELECT
       term_taxonomy_id,
       $seed_weight
-    FROM wp_2_vnv_user_preferred_tags
+    FROM {$table_prefix}vnv_user_preferred_tags
     WHERE `user_id` = \"{$visitor_user_id}\")
   ) AS adj
 

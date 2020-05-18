@@ -74,11 +74,18 @@ add_filter( 'excerpt_length', 'vnv_custom_excerpt_length' );
 /**
  * Ignore Stickies on Home
  */
-function vnv_ignore_sticky($query)
-{
+function vnv_ignore_sticky($query){
   if (is_home() && $query->is_main_query())
     $query->set('ignore_sticky_posts', true);
 }
 add_action('pre_get_posts', 'vnv_ignore_sticky');
+
+/**
+ * Exclude images from search results
+ */
+function exclude_images_from_search_results() {
+	global $wp_post_types;
+	$wp_post_types['attachment']->exclude_from_search = true;
+}
 
 ?>

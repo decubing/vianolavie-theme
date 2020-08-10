@@ -83,9 +83,10 @@ add_action('pre_get_posts', 'vnv_ignore_sticky');
 /**
  * Exclude images from search results
  */
-function exclude_images_from_search_results() {
+function vnv_exclude_images_from_search_results() {
 	global $wp_post_types;
 	$wp_post_types['attachment']->exclude_from_search = true;
 }
+add_action( 'init', 'vnv_exclude_images_from_search_results' );
 
 ?>

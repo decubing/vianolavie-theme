@@ -48,4 +48,7 @@ include_once('includes/vnv_og_meta.php');
 //Add Category Tooltips
 include_once('includes/vnv_category_tooltips.php');
 
+//Add Gravity Forms hooks
+include_once('includes/gforms_actions.php');
+
 ?>

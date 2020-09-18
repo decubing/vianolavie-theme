@@ -25,10 +25,11 @@ function vnv_scripts_and_styles() {
 /**
  * Script to fix an edit flow bug that prevents authors from being modified.
  */
-function edit_flow_fix() {
-	wp_enqueue_script( 'edit_flow_fix', get_template_directory_uri().'/scripts/editFlowKludge.js', array(), NULL, true );	
+function vnv_admin_scripts() {
+	wp_enqueue_script( 'edit_flow_fix', get_template_directory_uri().'/scripts/editFlowKludge.js', array(), NULL, true );
+	wp_enqueue_script( 'user_classes_filter', get_template_directory_uri().'/scripts/userClassesFilter.js', array(), NULL, true );
 }
 
 add_action( 'wp_enqueue_scripts', 'vnv_scripts_and_styles' );
-add_action( 'admin_enqueue_scripts', 'edit_flow_fix' );
+add_action( 'admin_enqueue_scripts', 'vnv_admin_scripts' );
 ?>

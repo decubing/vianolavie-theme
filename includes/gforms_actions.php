@@ -34,3 +34,23 @@ function vnv_filter_users_by_classes( $user_query ) {
   $meta_query = array_merge(['relation' => 'OR'], $class_args);
   $user_query->set('meta_query', $meta_query);
 }
+
+// Temporary script: run once to update classes field with class
+add_action( 'init', 'vnv_class_to_classes' );
+function vnv_class_to_classes() {
+  if ( !get_option( 'vnv_class_update_script') ) {
+    // TODO:
+    // get all users
+    // foreach user, if 'class' meta, send it to 'classes; ACF meta
+    $user_query = new WP_User_Query();
+    $users = $user_query->get_results();
+    foreach ( $users as $user ) {
+      $user_id = $user->ID;
+      $class = get_user_meta( $user_id, 'class', true );
+      if ($class) {
+        update_field('classes', [['class' => $class]], "user_$user_id");
+      }
+    }
+    update_option( 'vnv_class_update_script', '1' );
+  }
+}

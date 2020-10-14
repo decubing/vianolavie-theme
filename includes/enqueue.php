@@ -28,6 +28,9 @@ function vnv_scripts_and_styles() {
 function vnv_admin_scripts() {
 	wp_enqueue_script( 'edit_flow_fix', get_template_directory_uri().'/scripts/editFlowKludge.js', array(), NULL, true );
 	wp_enqueue_script( 'user_classes_filter', get_template_directory_uri().'/scripts/userClassesFilter.js', array(), NULL, true );
+  wp_localize_script( 'user_classes_filter', 'classes', 
+    array( 'list' => vnv_get_all_classes() ) 
+  );
 }
 
 add_action( 'wp_enqueue_scripts', 'vnv_scripts_and_styles' );

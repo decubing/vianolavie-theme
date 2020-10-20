@@ -10,18 +10,15 @@ if (document.querySelector('form .search-box') && document.querySelector('#user-
 
 // User profile page
 if (document.querySelector('form#your-profile')) {
-  // var rows = document.querySelectorAll(':not(.acf-clone) > .acf-field-5f4845550d276');
-  // var lastRow = rows.length ? rows[length-1] : null;
   var classDropdown = document.createElement('span');
   classDropdown.innerHTML = classes.list;
   var addButton = document.querySelector('a.button[data-event="add-row"]')
   var buttonGroup = addButton.parentElement;
   buttonGroup.append(classDropdown);
   classDropdown.addEventListener('change', addExistingClass);
-  // console.log(classDropdown.querySelector('select'));
   function addExistingClass(event) {
     addButton.click();
-    var rows = document.querySelectorAll(':not(.acf-clone) > .acf-field-5f4845550d276');
+    var rows = document.querySelectorAll(':not(.acf-clone) > .acf-field-5f566e3c43594');
     var lastRow = rows.length ? rows[rows.length-1] : null;
     lastRow.querySelector('input').value = event.target.value;
   }

@@ -66,16 +66,17 @@ function vnv_get_all_classes() {
       'classes_4_class', 'classes_5_class',
       'classes_6_class', 'classes_7_class',
       'classes_8_class')
-    ORDER BY um.meta_value DESC"
+    ORDER BY um.meta_value ASC"
   );
   
-  $HTMLstring = "<select name=\"class-s\" id=\"user-class-search-input\">\n<option value=\"\">Select below...</option>\n";
+  $HTMLstring = "<select name=\"class-s\" id=\"user-class-search-input\">\n<option value=\"\">Select a class...</option>\n";
   foreach ($result as $class) {
     if (strpos($class, '"') !== false) continue;
     $class = htmlspecialchars($class, ENT_QUOTES);
     $HTMLstring .= "<option value=\"$class\">$class</option>\n";
   }
-  $HTMLstring .= '</select><input type="submit" id="class-search-submit" class="button" value="Search Classes"></input>';
+  // Close select tag
+  $HTMLstring .= '</select>';
 
 	return $HTMLstring;
 }
